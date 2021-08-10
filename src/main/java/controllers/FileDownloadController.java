@@ -52,6 +52,9 @@ public class FileDownloadController {
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .header("Contend-Description", "File Transfer")
+                .header("Content-type", "application/octet-stream")
+                .header("Expires", "0")
                 .body(resource);
     
 	}
