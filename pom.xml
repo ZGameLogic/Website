@@ -7,7 +7,7 @@
 	<version>1.0.0</version>
 	<name>Ben-Website</name>
 	<description>Bens main website</description>
-	
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -18,7 +18,7 @@
 	<build>
 		<finalName>${artifactId}</finalName>
 		<plugins>
-		<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
