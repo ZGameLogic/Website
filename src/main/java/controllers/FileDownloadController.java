@@ -36,6 +36,7 @@ public class FileDownloadController {
 			response.flushBuffer();
 		} catch (IOException ex) {
 			System.out.println("bad");
+			ex.printStackTrace();
 		}
 	}
 }
