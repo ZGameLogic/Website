@@ -3,10 +3,9 @@ package controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStream;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,6 +26,21 @@ public class FileDownloadController {
 		}
 	}
 
+	@GetMapping("/downloads/{fileName:.+}")
+	public void download(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("fileName") String fileName) throws IOException {
+		 try {
+		      // get your file as InputStream
+		      InputStream is = new FileInputStream(new File(downloadFolder + "\\" + fileName));
+		      // copy it to response's OutputStream
+		      org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+		      response.flushBuffer();
+		    } catch (IOException ex) {
+		    	System.out.println("bad");
+		    }
+	}
+	
+	/*
 	@GetMapping("/downloads/{fileName:.+}")
 	public void download(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("fileName") String fileName) throws IOException {
@@ -68,4 +82,5 @@ public class FileDownloadController {
 		inputStream.close();
 		outStream.close();
 	}
+	*/
 }
