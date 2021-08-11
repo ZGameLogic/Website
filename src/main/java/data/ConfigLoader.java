@@ -17,6 +17,9 @@ public class ConfigLoader {
 	@Value("${keystore.location:none}")
 	private String keystoreLocation;
 	
+	@Value("${halo.api:none}")
+	private String haloAPIKey;
+	
 	@Value("${port}")
 	private String port;
 

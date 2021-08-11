@@ -8,10 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import data.ConfigLoader;
+import lombok.Getter;
 
 @SpringBootApplication(scanBasePackages = {"controllers"})
 public class App {
 	
+	@Getter
 	public static ConfigLoader config;
 
 	public static void main(String[] args) throws IOException {

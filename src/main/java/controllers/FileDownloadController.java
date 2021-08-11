@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -31,10 +32,15 @@ public class FileDownloadController {
 
 	
 	@GetMapping("/downloads/{fileName:.+}")
-	public ResponseEntity<Resource> download(HttpServletResponse response, HttpServletRequest request, @PathVariable("fileName") String fileName) throws IOException {
+	public ResponseEntity<Resource> download(HttpServletResponse response, HttpServletRequest request, @PathVariable("fileName") String fileName) {
 		
 		// Load file as Resource
-        Resource resource = new UrlResource("file:" + downloadFolder + "//" + fileName);
+        Resource resource = null;
+		try {
+			resource = new UrlResource("file:" + downloadFolder + "//" + fileName);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 
         // Try to determine file's content type
         String contentType = null;
@@ -56,7 +62,6 @@ public class FileDownloadController {
                 .header("Content-type", "application/octet-stream")
                 .header("Expires", "0")
                 .body(resource);
-    
 	}
 	
 }
