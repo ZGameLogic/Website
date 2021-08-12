@@ -1,3 +1,1 @@
-This is a test
-
-This is a line of the test part 2
+This website is built off of Springboot-MVC using Thymeleaf in java. Using Thymeleaf, I am able to automatically inject values into the HTML code with Java as they are being served out to the user. This lets me call APIs for the project page to connect to my git stash server and dynamically update the project list. 
