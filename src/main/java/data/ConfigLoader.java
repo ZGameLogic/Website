@@ -22,5 +22,8 @@ public class ConfigLoader {
 	
 	@Value("${port}")
 	private String port;
+	
+	@Value("${bitbucket.api}")
+	private String bitbucketAPIKey;
 
 }

@@ -2,10 +2,8 @@
 
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<link href="webjars/bootstrap/5.1.0/css/bootstrap.min.css"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" th:href="@{/styles/carousel.css}">
 
@@ -38,29 +36,18 @@
 	</nav>
 
 	<div class="container-sm">
-		<div id="carouselExampleIndicators" class="carousel slide"
-			data-bs-ride="carousel">
-			<div class="carousel-indicators">
-				<button type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="0" class="active" aria-current="true"
-					aria-label="Slide 1"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="1" aria-label="Slide 2"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="2" aria-label="Slide 3"></button>
+		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+	<div class="carousel-indicators">
+				<button th:each="project, iStat: ${projects}" type="button" data-bs-target="#carouselExampleIndicators" th:data-bs-slide-to="${iStat.index}" th:class="${iStat.index==0}? 'active' : ''"
+				th:aria-current="${iStat.index==0}? 'true' : ''" th:aria-label= "'Slide ' + ${iStat.index}"></button>
 			</div>
 			<div class="carousel-inner text-center">
-				<div class="carousel-item active">
-					<div class="d-inline-block w-75 h-350" style="background-color: #eee;">Test
-						1</div>
-				</div>
-				<div class="carousel-item">
-					<div class="d-inline-block w-75" style="background-color: #eee;">Test
-						2</div>
-				</div>
-				<div class="carousel-item">
-					<div class="d-inline-block w-75" style="background-color: #eee;">Test
-						3</div>
+				<div th:each="project, iStat: ${projects}" th:class="${iStat.index==0}? 'carousel-item active' : 'carousel-item'">
+					<div class="d-inline-block w-75 h-350" style="background-color: #eee;">
+						<h1 th:text="${project.name}"></h1>
+						<p th:text="${project.description}"></p>
+						<p data-th-utext="${#strings.replace(#strings.escapeXml(project.websiteInfo),'&#10;','&lt;br&gt;')}"></p>
+					</div>
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button"
@@ -75,191 +62,6 @@
 			</button>
 		</div>
 	</div>
-
-	<!-- 
-	<div id="carouselExampleIndicators" class="carousel slide"
-		data-ride="carousel">
-		<ol class="carousel-indicators">
-			<li data-target="#carouselExampleIndicators" data-slide-to="0"
-				class="active"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
-		</ol>
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<div class="container-sm">
-					<div class="row gy-15">
-						<div class="col">
-							<div class="p-3 border bg-light">
-								<h2>This website</h2>
-								<div></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="container-sm">
-					<div class="row gy-15">
-						<div class="col">
-							<div class="p-3 border bg-light">
-								<h2>Home network</h2>
-								<div>My family's home network is managed by me. Using my
-									advanced networking knowledge, I have greatly improved the
-									network experience at my residence. I have installed multiple
-									wireless access points to insure full coverage. I have also
-									installed a VPN server and a data server, allowing any one of
-									my family members secure access to data and other network
-									devices at one time. I have also installed and implemented a
-									DNS level ad blocker on the network, blocking any blacklisted
-									advertisements at the DNS lookup stage of any network
-									transmission. Along with the VPN, I have a dedicated computer
-									running that can be remoted into in case my family members
-									needed access to a windows computer wherever they are. This
-									machine hosts the ZGameServer as well as multiple other
-									application servers moderated by me. It also holds my pipeline
-									for project deployment.</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="container-sm">
-					<div class="row gy-15">
-						<div class="col">
-							<div class="p-3 border bg-light">
-								<h2>ZGameDefence</h2>
-								<div>This is a simple strategy game I designed and
-									implemented early in my programming endeavors. It was my first
-									experience in JFrame so I was teaching myself what I needed to
-									know in order to create this game. The goal of the game is to
-									destroy your opponent's castle by sending troops and having
-									them reach that side. There are plenty of different troops to
-									choose from, all with differing costs. This project really
-									opened my eyes to how much math and trigonometry is required in
-									programming games. I also learned a lot about inheritance and
-									objects in general.</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="container-sm">
-					<div class="row gy-15">
-						<div class="col">
-							<div class="p-3 border bg-light">
-								<h2>ZGame</h2>
-								<div>This is a complex game project still in the making.
-									This is a large scale, multi-person project that I am leading.
-									ZGame is a 2D, top down, RPG dungeon crawler. This project has
-									really challenged me and furthered my development as a
-									programmer. The project originally started in JFrame but is now
-									being moved over to JavaFX. My knowledge in both has increased
-									ten-fold from the previous project. Throughout this experience,
-									I am picking up how to collaborate and lead a team. The ZGame
-									project has increased my understanding of how important it is
-									to organize my code, classes, and packages, as well as, how to
-									comment code in a way other programmers can understand. I have
-									also started working with multiple threads to allow the user to
-									launch the game only having loaded core assets, reducing load
-									time for the start of the game. Additionally, I have
-									investigated strategies that other programmers have used and
-									written, such as the A-Star algorithm for pathfinding.</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="container-sm">
-					<div class="row gy-15">
-						<div class="col">
-							<div class="p-3 border bg-light">
-								<h2>ZGameServer</h2>
-								<div>This project is the one I am most proud of. It is the
-									authentication and game server for ZGame, which handles user
-									requests like logging in, global chat, creating and hosting
-									games, and saving data. This project has taught me more about
-									Java than any other project I have worked on. I have learned
-									about socket programming, storing passwords, storing data,
-									multi-threading, JFrame with components, and invoking methods
-									during runtime. This made communicating with the server much
-									easier for the client. All it must do is make a method/function
-									call through the socket rather than the regular string parsing
-									and switch statements on what this message needs the server to
-									do</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="container-sm">
-					<div class="row gy-15">
-						<div class="col">
-							<div class="p-3 border bg-light">
-								<h2>ZGame Level Creator</h2>
-								<div>This project goes hand in hand with the ZGame suite
-									of projects. This is a simple application that allowed the
-									creation of a level for ZGame. This is for the development team
-									to test and create levels easily. This was made at the early
-									stages of my JFrame career, so no components were used. This
-									means I created my own buttons, dropdown menus, labels, icons,
-									and many more common JFrame components from scratch.</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="container-sm">
-					<div class="row gy-15">
-						<div class="col">
-							<div class="p-3 border bg-light">
-								<h2>Mod Manager</h2>
-								<div>This is a simple application for Minecraft. Having
-									many friends with many interests, keeping a modification pack
-									updated and distributed is a daunting task. The most popular
-									modification site is called CurseForge. My application serves
-									two purposes. The first purpose is to update the mods by
-									searching CurseForge for the mod, check if it has an update,
-									and then download and install the updated mod if needed. This
-									made updating 200+ modifications extremely easy. The second
-									purpose is to distribute the modifications to clients. The
-									client runs the program before launching the game, connect to
-									the server, and download and update any differences in
-									modifications between the client and server. I gained knowledge
-									about how to communicate between HTML and Java for this
-									project, and how to download something from a URL using Java.</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<a class="carousel-control-prev" href="#carouselExampleIndicators"
-			role="button" data-slide="prev"> <span
-			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-			class="sr-only">Previous</span>
-		</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-			role="button" data-slide="next"> <span
-			class="carousel-control-next-icon" aria-hidden="true"></span> <span
-			class="sr-only">Next</span>
-		</a>
-	</div>
- -->
 </body>
 </html>
 
