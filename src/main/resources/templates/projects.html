@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link th:href="@{/styles/social.css}" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/styles/gradiant.css}">
+    <link rel="icon" type="image/png" th:href="@{assets/images/favicon.png}">
+    
+	<title>Ben Shabowski</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Ben Shabowski</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/shaboonan">Shaboonan Section</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Projects</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">About me</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Resume</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container-sm">
+  <div class="row gy-15">
+    <div class="col">
+    	<div class="p-3 border bg-light">
+    		<h2>This website</h2>
+    		<div></div>
+    	</div>
+    </div>
+  </div>
+  <div class="row gy-15">
+    <div class="col">
+    	<div class="p-3 border bg-light">
+    		<h2>Home network</h2>
+    		<div>My family's home network is managed by me. Using my advanced networking knowledge, I have greatly improved the network experience at my residence. I have installed multiple wireless access points to insure full coverage. I have also installed a VPN server and a data server, allowing any one of my family members secure access to data and other network devices at one time. I have also installed and implemented a DNS level ad blocker on the network, blocking any blacklisted advertisements at the DNS lookup stage of any network transmission. Along with the VPN, I have a dedicated computer running that can be remoted into in case my family members needed access to a windows computer wherever they are. This machine hosts the ZGameServer as well as multiple other application servers moderated by me. It also holds my pipeline for project deployment.</div>
+    	</div>
+    </div>
+  </div>
+  <div class="row gy-15">
+    <div class="col">
+    	<div class="p-3 border bg-light">
+    		<h2>ZGameDefence</h2>
+    		<div>This is a simple strategy game I designed and implemented early in my programming endeavors. It was my first experience in JFrame so I was teaching myself what I needed to know in order to create this game. The goal of the game is to destroy your opponent's castle by sending troops and having them reach that side. There are plenty of different troops to choose from, all with differing costs. This project really opened my eyes to how much math and trigonometry is required in programming games. I also learned a lot about inheritance and objects in general.</div>
+    	</div>
+    </div>
+  </div>
+    <div class="row gy-15">
+    <div class="col">
+    	<div class="p-3 border bg-light">
+    		<h2>ZGame</h2>
+    		<div>This is a complex game project still in the making. This is a large scale, multi-person project that I am leading. ZGame is a 2D, top down, RPG dungeon crawler. This project has really challenged me and furthered my development as a programmer. The project originally started in JFrame but is now being moved over to JavaFX. My knowledge in both has increased ten-fold from the previous project. Throughout this experience, I am picking up how to collaborate and lead a team. The ZGame project has increased my understanding of how important it is to organize my code, classes, and packages, as well as, how to comment code in a way other programmers can understand. I have also started working with multiple threads to allow the user to launch the game only having loaded core assets, reducing load time for the start of the game. Additionally, I have investigated strategies that other programmers have used and written, such as the A-Star algorithm for pathfinding. </div>
+    	</div>
+    </div>
+  </div>
+    <div class="row gy-15">
+    <div class="col">
+    	<div class="p-3 border bg-light">
+    		<h2>ZGameServer</h2>
+    		<div>This project is the one I am most proud of. It is the authentication and game server for ZGame, which handles user requests like logging in, global chat, creating and hosting games, and saving data. This project has taught me more about Java than any other project I have worked on. I have learned about socket programming, storing passwords, storing data, multi-threading, JFrame with components, and invoking methods during runtime. This made communicating with the server much easier for the client. All it must do is make a method/function call through the socket rather than the regular string parsing and switch statements on what this message needs the server to do</div>
+    	</div>
+    </div>
+  </div>
+    <div class="row gy-15">
+    <div class="col">
+    	<div class="p-3 border bg-light">
+    		<h2>ZGame Level Creator</h2>
+    		<div>This project goes hand in hand with the ZGame suite of projects. This is a simple application that allowed the creation of a level for ZGame. This is for the development team to test and create levels easily. This was made at the early stages of my JFrame career, so no components were used. This means I created my own buttons, dropdown menus, labels, icons, and many more common JFrame components from scratch.</div>
+    	</div>
+    </div>
+  </div>
+    <div class="row gy-15">
+    <div class="col">
+    	<div class="p-3 border bg-light">
+    		<h2>Mod Manager</h2>
+    		<div>This is a simple application for Minecraft. Having many friends with many interests, keeping a modification pack updated and distributed is a daunting task. The most popular modification site is called CurseForge. My application serves two purposes. The first purpose is to update the mods by searching CurseForge for the mod, check if it has an update, and then download and install the updated mod if needed. This made updating 200+ modifications extremely easy. The second purpose is to distribute the modifications to clients. The client runs the program before launching the game, connect to the server, and download and update any differences in modifications between the client and server. I gained knowledge about how to communicate between HTML and Java for this project, and how to download something from a URL using Java.</div>
+    	</div>
+    </div>
+  </div>
+    <div class="row gy-15">
+    <div class="col">
+    	<div class="p-3 border bg-light">
+    		<h2>Discord Bot</h2>
+    		<div>A good friend of mine and I went crazy for two weeks and thus the memebot was born. It is a discord integrated application that saves photos to a database submitted from users, sends it through a curation process, and then users can request the photos based on tags that they submit with the request. The curation process is done with a channel only curators have access to in the discord server. The channel receives the meme that was submitted, presents the tags, and then the curators decline, approve, or approve with different tags based off of what they see. Then the user who submits the meme gets a message back saying it was approved or denied. The project uses Java, Node JS, and SQL. </div>
+    	</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
