@@ -25,5 +25,11 @@ public class ConfigLoader {
 	
 	@Value("${bitbucket.api}")
 	private String bitbucketAPIKey;
+	
+	@Value("${sql.username}")
+	private String sqlUser;
+	
+	@Value("${sql.password}")
+	private String sqlPassword;
 
 }

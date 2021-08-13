@@ -5,12 +5,16 @@ import java.util.Properties;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import data.ConfigLoader;
 import lombok.Getter;
 
-@SpringBootApplication(scanBasePackages = {"controllers"})
+@SpringBootApplication(scanBasePackages = {"controllers", "dataStructures"})
+@EnableJpaRepositories("dataStructures")
+@EntityScan("dataStructures")
 public class App {
 	
 	@Getter
@@ -22,6 +26,8 @@ public class App {
 		SpringApplication s = new SpringApplication(App.class);
 		s.setDefaultProperties(injectProperties());
 		s.run(args);
+		
+		
 	}
 	
 	private static Properties injectProperties() {
@@ -31,6 +37,15 @@ public class App {
 		properties.setProperty("spring.http.multipart.enabled", "false");
 		properties.setProperty("spring.http.multipart.maxFileSize", "-1");
 		properties.setProperty("spring.http.multipart.maxRequestSize", "-1");
+		
+		properties.setProperty("spring.datasource.url", "jdbc:sqlserver://192.168.1.12;databaseName=Website");
+		properties.setProperty("spring.datasource.username", config.getSqlUser());
+		properties.setProperty("spring.datasource.password", config.getSqlPassword());
+		
+		properties.setProperty("spring.datasource.driver-class-name", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		properties.setProperty("spring.jpa.hibernate.ddl-auto", "update");
+		properties.setProperty("spring.jpa.show-sql", "true");
+		properties.setProperty("spring.jpa.properties.hibernate.format_sql", "true");
 		
 		properties.setProperty("logging.level.root", "INFO");
 		properties.setProperty("server.port", config.getPort());
