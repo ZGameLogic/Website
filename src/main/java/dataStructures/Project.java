@@ -9,6 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.AllArgsConstructor;
 
 @Getter
@@ -29,6 +35,34 @@ public class Project {
 	
 	public Project() {
 		
+	}
+	
+	public Project(JSONObject body) throws JSONException {
+		if(body.has("name")) {
+			name = body.getString("name");
+			if(body.has("description")) {
+				description = body.getString("description");
+			}
+			if(body.has("url")) {
+				description = body.getString("url");
+			}
+			if(body.has("websiteInfo")) {
+				description = body.getString("websiteInfo");
+			}
+		} else {
+			throw new JSONException("No key name in JSONObject");
+		}
+	}
+	
+	public JSONObject toJSONObject() {
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+			return new JSONObject(mapper.writeValueAsString(this));
+		} catch (JsonProcessingException | JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

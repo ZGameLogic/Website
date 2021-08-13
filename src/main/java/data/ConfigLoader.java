@@ -31,5 +31,8 @@ public class ConfigLoader {
 	
 	@Value("${sql.password}")
 	private String sqlPassword;
+	
+	@Value("${website.api}")
+	private String websiteApi;
 
 }

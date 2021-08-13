@@ -26,8 +26,6 @@ public class App {
 		SpringApplication s = new SpringApplication(App.class);
 		s.setDefaultProperties(injectProperties());
 		s.run(args);
-		
-		
 	}
 	
 	private static Properties injectProperties() {

@@ -5,9 +5,11 @@ import java.util.LinkedList;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import application.App;
 import dataStructures.Project;
@@ -43,4 +45,17 @@ public class ProjectsController {
 		model.addAttribute("projects", projects);
         return "projects";
     }
+	
+	@GetMapping("projects/api")
+	public ResponseEntity<String> getAll(@RequestBody String bodyString) {
+		try {
+			JSONObject body = new JSONObject(bodyString);
+			if(body.has("apiKey")) {
+				
+			}
+		} catch (JSONException e) {
+			return ResponseEntity.ok("Invalid JSON format");
+		}
+		return null;
+	}
 }
