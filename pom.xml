@@ -35,7 +35,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<fork>true</fork>
-					<mainClass>${start-class}</mainClass>
+					<mainClass>application.App</mainClass>
 				</configuration>
 				<executions>
 					<execution>
