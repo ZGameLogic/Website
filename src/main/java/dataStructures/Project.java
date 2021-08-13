@@ -55,10 +55,8 @@ public class Project {
 	}
 	
 	public JSONObject toJSONObject() {
-		ObjectMapper mapper = new ObjectMapper();
-		
 		try {
-			return new JSONObject(mapper.writeValueAsString(this));
+			return new JSONObject(new ObjectMapper().writeValueAsString(this));
 		} catch (JsonProcessingException | JSONException e) {
 			e.printStackTrace();
 		}
