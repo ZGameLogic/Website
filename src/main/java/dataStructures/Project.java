@@ -44,10 +44,10 @@ public class Project {
 				description = body.getString("description");
 			}
 			if(body.has("url")) {
-				description = body.getString("url");
+				url = body.getString("url");
 			}
 			if(body.has("websiteInfo")) {
-				description = body.getString("websiteInfo");
+				websiteInfo = body.getString("websiteInfo");
 			}
 		} else {
 			throw new JSONException("No key name in JSONObject");
