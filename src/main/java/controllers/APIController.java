@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import application.App;
 import dataStructures.Project;
@@ -21,10 +22,9 @@ public class APIController {
 	private ProjectRepository dbProjects;
 	
 	@GetMapping("api/getProjects")
-	public ResponseEntity<String> getAllProjects(@RequestBody String bodyString) {
+	public ResponseEntity<String> getAllProjects(@RequestHeader(value="apiKey") String key) {
 		try {
-			JSONObject body = new JSONObject(bodyString);
-			if(validateKey(body)) {
+			if(validateKey(key)) {
 				JSONObject returnBody = new JSONObject();
 				JSONArray projects = new JSONArray();
 				for(Project current : dbProjects.findAll()) {
@@ -40,10 +40,10 @@ public class APIController {
 	}
 	
 	@PostMapping("api/deleteProject")
-	public ResponseEntity<String> deleteProject(@RequestBody String bodyString) {
+	public ResponseEntity<String> deleteProject(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
 		try {
 			JSONObject body = new JSONObject(bodyString);
-			if(validateKey(body)) {
+			if(validateKey(key)) {
 				if(body.has("id")) {
 					dbProjects.deleteById(body.getInt("id"));
 					return ResponseEntity.ok("Project deleted");
@@ -59,10 +59,10 @@ public class APIController {
 	}
 	
 	@PostMapping("api/createProject")
-	public ResponseEntity<String> createProject(@RequestBody String bodyString) {
+	public ResponseEntity<String> createProject(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
 		try {
 			JSONObject body = new JSONObject(bodyString);
-			if(validateKey(body)) {
+			if(validateKey(key)) {
 				Project newProject = new Project(body);
 				dbProjects.save(newProject);
 				return ResponseEntity.ok("Project added");
@@ -74,14 +74,7 @@ public class APIController {
 	}
 	
 	
-	private boolean validateKey(JSONObject body) {
-		if(body.has("apiKey")) {
-			try {
-				return body.getString("apiKey").equals(App.getConfig().getWebsiteApi());
-			} catch (JSONException e) {
-				return false;
-			}
-		}
-		return false;
-	}
+	private boolean validateKey(String key) {
+		return key.equals(App.getConfig().getWebsiteApi());
+	}		
 }
