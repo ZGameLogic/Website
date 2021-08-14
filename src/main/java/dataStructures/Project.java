@@ -3,6 +3,7 @@ package dataStructures;
 import lombok.Getter;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +32,7 @@ public class Project {
 	private String name;
 	private String description;
 	private String url;
+	@Column(name = "website_info", length = 1000)
 	private String websiteInfo;
 	
 	public Project() {
