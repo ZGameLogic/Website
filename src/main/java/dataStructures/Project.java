@@ -43,6 +43,9 @@ public class Project {
 			if(body.has("description")) {
 				description = body.getString("description");
 			}
+			if(body.has("id")) {
+				id = body.getInt("id");
+			}
 			if(body.has("url")) {
 				url = body.getString("url");
 			}
@@ -61,6 +64,14 @@ public class Project {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void setProject(Project p) {
+		id = p.getId();
+		name = p.getName();
+		description = p.getDescription();
+		url = p.getUrl();
+		websiteInfo = p.getWebsiteInfo();
 	}
 
 }

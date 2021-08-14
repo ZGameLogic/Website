@@ -73,6 +73,25 @@ public class APIController {
 		}
 	}
 	
+	@PostMapping("api/editProject")
+	public ResponseEntity<String> editProject(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
+		System.out.println(bodyString);
+		System.out.println();
+		try {
+			JSONObject body = new JSONObject(bodyString);
+			if(validateKey(key)) {
+				Project newProject = new Project(body);
+				Project oldProject = dbProjects.getOne(newProject.getId());
+				oldProject.setProject(newProject);
+				dbProjects.save(oldProject);
+				return ResponseEntity.ok("Project edited");
+			}
+			return ResponseEntity.ok("Invalid apiKey");
+		} catch (JSONException e) {
+			return ResponseEntity.ok("Invalid JSON format");
+		}
+	}
+	
 	
 	private boolean validateKey(String key) {
 		return key.equals(App.getConfig().getWebsiteApi());
