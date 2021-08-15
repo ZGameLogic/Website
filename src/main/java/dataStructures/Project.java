@@ -33,7 +33,7 @@ public class Project {
 	@Column(name = "website_info", length = 1000)
 	private String description;
 	private String url;
-	@Column(name = "website_info", length = 10000)
+	@Column(name = "website_info", length = 2500)
 	private String websiteInfo;
 	
 	public Project() {
