@@ -30,10 +30,10 @@ public class Project {
     private Integer id;
     
 	private String name;
-	@Column(name = "website_info", length = 1000)
+	@Column(name = "description", length = 1000)
 	private String description;
 	private String url;
-	@Column(name = "website_info", length = 2500)
+	@Column(name = "website_info", length = 10000)
 	private String websiteInfo;
 	
 	public Project() {
