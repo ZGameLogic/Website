@@ -36,7 +36,7 @@ public class App {
 		properties.setProperty("spring.http.multipart.maxFileSize", "-1");
 		properties.setProperty("spring.http.multipart.maxRequestSize", "-1");
 		
-		properties.setProperty("spring.datasource.url", "jdbc:sqlserver://192.168.1.12;databaseName=Website");
+		properties.setProperty("spring.datasource.url", "jdbc:sqlserver://192.168.1.12;databaseName=" + config.getDatabaseName());
 		properties.setProperty("spring.datasource.username", config.getSqlUser());
 		properties.setProperty("spring.datasource.password", config.getSqlPassword());
 		

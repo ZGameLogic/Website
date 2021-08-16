@@ -34,5 +34,8 @@ public class ConfigLoader {
 	
 	@Value("${website.api}")
 	private String websiteApi;
+	
+	@Value("${database.name}")
+	private String databaseName;
 
 }
