@@ -4,6 +4,9 @@
 <head>
 <link href="webjars/bootstrap/5.1.0/css/bootstrap.min.css"
 	rel="stylesheet">
+	<link href="webjars/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+	<link th:href="@{/styles/social.css}" type="text/css" rel="stylesheet" />
 <script type="text/javascript"
 	src="webjars/bootstrap/5.1.0/js/bootstrap.min.js"></script>
 
@@ -51,9 +54,14 @@
 					<div class="d-inline-block w-75 text-left"
 						style="background-color: #eee; min-height:600px; ">
 						<h1 th:text="${project.name}"></h1>
-						<p th:text="${project.description}" style="text-align: left;"></p>
+						<p th:text="${project.description}"></p>
 						<p
 							data-th-utext="${#strings.replace(#strings.escapeXml(project.websiteInfo),'&#10;','&lt;br&gt;')}" style="text-align: left;"></p>
+						<ul class="social-network social-circle">
+					<li><a th:href="${project.url}"
+						class="icobitbucket" title="Repository link"><i
+							class="fa fa-bitbucket"></i></a></li>
+				</ul>
 					</div>
 				</div>
 			</div>
