@@ -13,8 +13,8 @@ import data.ConfigLoader;
 import lombok.Getter;
 
 @SpringBootApplication(scanBasePackages = {"controllers", "dataStructures"})
-@EnableJpaRepositories("dataStructures")
-@EntityScan("dataStructures")
+@EnableJpaRepositories({"dataStructures"})
+@EntityScan({"dataStructures"})
 public class App {
 	
 	@Getter
@@ -32,22 +32,33 @@ public class App {
 		Properties properties = new Properties();
 		properties.setProperty("spring.main.banner-mode", "off");
 		
+		// Stuff for download server
 		properties.setProperty("spring.http.multipart.enabled", "false");
 		properties.setProperty("spring.http.multipart.maxFileSize", "-1");
 		properties.setProperty("spring.http.multipart.maxRequestSize", "-1");
 		
+		// Stuff for SQL
 		properties.setProperty("spring.datasource.url", "jdbc:sqlserver://192.168.1.12;databaseName=" + config.getDatabaseName());
 		properties.setProperty("spring.datasource.username", config.getSqlUser());
 		properties.setProperty("spring.datasource.password", config.getSqlPassword());
-		
 		properties.setProperty("spring.datasource.driver-class-name", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		properties.setProperty("spring.jpa.hibernate.ddl-auto", "update");
 		properties.setProperty("spring.jpa.show-sql", "true");
 		properties.setProperty("spring.jpa.properties.hibernate.format_sql", "true");
 		
+		// Stuff for website
 		properties.setProperty("logging.level.root", "INFO");
 		properties.setProperty("server.port", config.getPort());
 		
+		// Stuff for email
+		properties.setProperty("spring.mail.host", "zgamelogic.com");
+		properties.setProperty("spring.mail.port", "25");
+		properties.setProperty("spring.mail.username", config.getMailUserName());
+		properties.setProperty("spring.mail.password", config.getMailPassword());
+		properties.setProperty("spring.mail.properties.mail.smtp.auth", "true");
+		properties.setProperty("spring.mail.properties.mail.smtp.starttls.enable", "true");
+		
+		// Stuff for SSL
 		if(!config.getKeystoreLocation().equals("none")) {
 			properties.setProperty("server.ssl.enabled", "true");
 			properties.setProperty("server.ssl.key-store", config.getKeystoreLocation());

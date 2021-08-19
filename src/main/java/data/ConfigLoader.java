@@ -37,5 +37,11 @@ public class ConfigLoader {
 	
 	@Value("${database.name}")
 	private String databaseName;
+	
+	@Value("${mail.username}")
+	private String mailUserName;
+	
+	@Value("${mail.password}")
+	private String mailPassword;
 
 }
