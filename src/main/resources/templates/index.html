@@ -34,6 +34,7 @@
 		</div>
 	</nav>
 
+	<!-- Social media section -->
 	<div class="container align-middle text-center">
 		<div class="row">
 			<h2>Social Media</h2>
@@ -54,7 +55,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="row" style="text-align: center;">
+		<div class="row" style="text-align: center; margin-bottom: 30px;">
 			<h2>Contact Information</h2>
 			<ul class="list-group list-group-horizontal"
 				style="display: inline-table;">
@@ -64,6 +65,28 @@
 			</ul>
 		</div>
 	</div>
+	
+		<div class="border border-dark rounded middle-align text-center"
+			style="background: #5b555e; max-width: 600px; padding-top: 20px; margin:auto">
+			<form class="form-group" method="POST" th:action="@{/response}">
+				<hr>
+				<h4 class="text-center">Send me a message!</h4>
+				<div class="row">
+					<div class="middle-align text-center">
+						<label for="from">Email Address:</label><br> <input
+							type="text" id="from" name="from" required><br> <label
+							for="subject">Subject:</label><br> <input type="text"
+							id="subject" name="subject" required><br> <label
+							for="body">Message:</label><br> <input type="text" id="body"
+							name="body" required
+							style="margin-bottom: 30px; height: 100px; width: 500px;"><br>
+						<input class="btn" type="submit" value="Submit message"
+							style="height: 60px; width: 190px; margin-bottom: 30px; background: #835d96;" />
+					</div>
+					<hr>
+				</div>
+			</form>
+		</div>
 </body>
 </html>
 
