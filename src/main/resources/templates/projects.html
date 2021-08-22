@@ -57,8 +57,8 @@
 						<p th:text="${project.description}"></p>
 						<p
 							data-th-utext="${#strings.replace(#strings.escapeXml(project.websiteInfo),'&#10;','&lt;br&gt;')}" style="text-align: left;"></p>
-						<ul class="social-network social-circle">
-					<li><a th:href="${project.url}"
+						<ul th:if="${project?.url ne ''}" class="social-network social-circle">
+					<li><a th:href="${project?.url}"
 						class="icobitbucket" title="Repository link"><i
 							class="fa fa-bitbucket"></i></a></li>
 				</ul>
