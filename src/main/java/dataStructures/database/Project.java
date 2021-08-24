@@ -1,4 +1,4 @@
-package dataStructures;
+package dataStructures.database;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import dataStructures.json.Commits;
 import lombok.AllArgsConstructor;
 
 @Getter
@@ -35,6 +37,9 @@ public class Project {
 	private String url;
 	@Column(name = "website_info", length = 10000)
 	private String websiteInfo;
+	
+	@Transient
+	Commits commits;
 	
 	public Project() {
 		

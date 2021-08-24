@@ -52,16 +52,24 @@
 				<div th:each="project, iStat: ${projects}"
 					th:class="${iStat.index==0}? 'carousel-item active' : 'carousel-item'">
 					<div class="d-inline-block w-75 text-left"
-						style="background-color: #eee; min-height:600px; ">
+						style="background-color: #eee;">
 						<h1 th:text="${project.name}"></h1>
 						<p th:text="${project.description}"></p>
 						<p
-							data-th-utext="${#strings.replace(#strings.escapeXml(project.websiteInfo),'&#10;','&lt;br&gt;')}" style="text-align: left;"></p>
-						<ul th:if="${project?.url ne ''}" class="social-network social-circle">
-					<li><a th:href="${project?.url}"
-						class="icobitbucket" title="Repository link"><i
-							class="fa fa-bitbucket"></i></a></li>
-				</ul>
+							data-th-utext="${#strings.replace(#strings.escapeXml(project.websiteInfo),'&#10;','&lt;br&gt;')}"
+							style="text-align: left;"></p>
+						<ul id="commitLine"
+							style="list-style-type: none; text-align: left;">
+							<li th:each="commit, iStat: ${project.commits?.values}" th:if="${iStat.count < 11 and commit.author.displayName ne null}"><small
+								th:text="${commit.displayId}"></small> <small
+								th:text="${commit.author.displayName}"></small> <small
+								th:text="${commit.message}"></small></li>
+						</ul>
+						<ul th:if="${project?.url ne ''}"
+							class="social-network social-circle" style="margin-bottom:15px;">
+							<li><a th:href="${project?.url}" class="icobitbucket"
+								title="Repository link"><i class="fa fa-bitbucket"></i></a></li>
+						</ul>
 					</div>
 				</div>
 			</div>

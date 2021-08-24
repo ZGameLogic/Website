@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import application.App;
-import dataStructures.Project;
-import dataStructures.ProjectRepository;
+import dataStructures.database.Project;
+import dataStructures.database.ProjectRepository;
 
 @Controller
 public class APIController {

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import application.App;
-import dataStructures.Project;
-import dataStructures.ProjectRepository;
+import dataStructures.database.Project;
+import dataStructures.database.ProjectRepository;
 import dataStructures.json.Repositories.Value;
 import interfaces.WebRequester;
 
@@ -35,7 +35,7 @@ public class ProjectsController {
 			String description = current.getDescription();
 			String URL = current.getLinks().getSelf().get(0).getHref();
 			String info = WebRequester.getBitbucketRepoWebInfo(current.getSlug(), App.getConfig().getBitbucketAPIKey());
-			projects.add(new Project(0, name, description, URL, info));
+			projects.add(new Project(0, name, description, URL, info, WebRequester.getBitbucketRepoCommits(App.getConfig().getBitbucketAPIKey(), current.getSlug())));
 		}
 		// Get all the additions from the database
 		projects.addAll(dbProjects.findAll());
