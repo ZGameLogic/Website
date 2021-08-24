@@ -63,7 +63,7 @@ span.small {
 						<h3 th:text="${project.description}"></h3>
 						<p
 							data-th-utext="${#strings.replace(#strings.escapeXml(project.websiteInfo),'&#10;','&lt;br&gt;')}"
-							style="text-align: left;"></p>
+							style="text-align: left; padding: 20px"></p>
 							
 						<div th:if="${project?.url ne ''}"
 							class="social-network social-circle" style="margin-bottom:15px;">
