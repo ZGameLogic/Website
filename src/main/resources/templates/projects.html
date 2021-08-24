@@ -60,16 +60,18 @@
 							style="text-align: left;"></p>
 						<ul id="commitLine"
 							style="list-style-type: none; text-align: left;">
-							<li th:each="commit, iStat: ${project.commits?.values}" th:if="${iStat.count < 11 and commit.author.displayName ne null}"><small
-								th:text="${commit.displayId}"></small> <small
-								th:text="${commit.author.displayName}"></small> <small
-								th:text="${commit.message}"></small></li>
+							<li th:each="commit, iStat: ${project.commits?.values}" th:if="${iStat.count < 11 and commit.author.displayName ne null}">
+								<small>Commit ID: </small>
+								<small class="nav-link"><a th:text="${commit.displayId}" th:href="${#strings.replace(project.url,'/browse', '') + '/commits/' + commit.id}"></a></small>
+								<small th:text="${commit.author.displayName}"></small> 
+								<small th:text="${commit.message}"></small>
+							</li>
 						</ul>
-						<ul th:if="${project?.url ne ''}"
+						<div th:if="${project?.url ne ''}"
 							class="social-network social-circle" style="margin-bottom:15px;">
-							<li><a th:href="${project?.url}" class="icobitbucket"
+							<li style="list-style-type: none;"><a th:href="${project?.url}" class="icobitbucket"
 								title="Repository link"><i class="fa fa-bitbucket"></i></a></li>
-						</ul>
+						</div>
 					</div>
 				</div>
 			</div>

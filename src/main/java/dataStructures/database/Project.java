@@ -39,7 +39,7 @@ public class Project {
 	private String websiteInfo;
 	
 	@Transient
-	Commits commits;
+	private Commits commits;
 	
 	public Project() {
 		
