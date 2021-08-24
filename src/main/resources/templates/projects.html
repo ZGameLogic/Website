@@ -15,6 +15,12 @@
 <link rel="stylesheet" th:href="@{/styles/gradiant.css}">
 <link rel="icon" type="image/png" th:href="@{assets/images/favicon.png}">
 
+<style>
+span.small {
+  font-size: smaller;
+}
+</style>
+
 <title>Ben Shabowski</title>
 </head>
 <body>
@@ -54,24 +60,37 @@
 					<div class="d-inline-block w-75 text-left"
 						style="background-color: #eee;">
 						<h1 th:text="${project.name}"></h1>
-						<p th:text="${project.description}"></p>
+						<h3 th:text="${project.description}"></h3>
 						<p
 							data-th-utext="${#strings.replace(#strings.escapeXml(project.websiteInfo),'&#10;','&lt;br&gt;')}"
 							style="text-align: left;"></p>
-						<ul id="commitLine"
-							style="list-style-type: none; text-align: left;">
-							<li th:each="commit, iStat: ${project.commits?.values}" th:if="${iStat.count < 11 and commit.author.displayName ne null}">
-								<small>Commit ID: </small>
-								<small class="nav-link"><a th:text="${commit.displayId}" th:href="${#strings.replace(project.url,'/browse', '') + '/commits/' + commit.id}"></a></small>
-								<small th:text="${commit.author.displayName}"></small> 
-								<small th:text="${commit.message}"></small>
-							</li>
-						</ul>
+							
 						<div th:if="${project?.url ne ''}"
 							class="social-network social-circle" style="margin-bottom:15px;">
 							<li style="list-style-type: none;"><a th:href="${project?.url}" class="icobitbucket"
 								title="Repository link"><i class="fa fa-bitbucket"></i></a></li>
 						</div>
+						
+						<hr th:if="${project?.commits ne null}">
+						
+						<h3 th:if="${project?.commits ne null}">Recent commits</h3>
+						
+						<table th:if="${project?.commits ne null}" class="table table-sm table-dark table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Commit ID</th>
+									<th scope="col">Commit user</th>
+									<th scope="col">Commit message</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="commit, iStat: ${project.commits?.values}" th:if="${iStat.count < 11 and commit.author.displayName ne null}">
+									<td><a th:text="${commit.displayId}" class="nav-link small" th:href="${#strings.replace(project.url,'/browse', '') + '/commits/' + commit.id}"></a></td>
+									<td th:text="${commit.author.displayName}"></td>
+									<td th:text="${commit.message}"></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
