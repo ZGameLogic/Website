@@ -62,6 +62,7 @@ public class Ghost {
 
 	public Ghost(JSONObject body) {
 		try {
+			id = body.getInt("id");
 			name = body.getString("name");
 			description = body.getString("description");
 			
