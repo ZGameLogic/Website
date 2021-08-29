@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -105,6 +108,32 @@ public class APIController {
 					ghostsArray.put(current.toJSONObject());
 				}
 				returnBody.put("ghosts", ghostsArray);
+				return ResponseEntity.ok(returnBody.toString());
+			}
+			return ResponseEntity.ok("Invalid apiKey");
+		} catch (JSONException e) {
+			return ResponseEntity.ok("Invalid JSON format");
+		}
+	}
+	
+	@GetMapping("api/getEvidence")
+	public ResponseEntity<String> getAllEvidence(@RequestHeader(value="apiKey") String key) {
+		try {
+			if(validateKey(key)) {
+				JSONObject returnBody = new JSONObject();				
+				Set<String> types = new HashSet<String>();
+				
+				System.out.println(ghosts.findAll().size());
+				
+				for(Ghost current : ghosts.findAll()) {
+					for(String x : current.getEvidence().split(",")) {
+						types.add(x);
+					}
+				}
+				
+				JSONArray ghostsArray = new JSONArray(types);
+				
+				returnBody.put("evidence", ghostsArray);
 				return ResponseEntity.ok(returnBody.toString());
 			}
 			return ResponseEntity.ok("Invalid apiKey");
