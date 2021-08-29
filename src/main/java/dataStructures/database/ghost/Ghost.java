@@ -34,7 +34,7 @@ import lombok.ToString;
 public class Ghost {
 	
 	public enum Evidence {
-		EMF_5, Ghost_Orbs, Spirit_Box, Freezing_Temperatures, Fingerprints, Ghost_Writing, DOTS_Projetor;
+		EMF_5, Ghost_Orbs, Spirit_Box, Freezing_Temperatures, Fingerprints, Ghost_Writing, DOTS_Projector;
 	}
 
     @Id
@@ -71,7 +71,7 @@ public class Ghost {
 			for(int i = 0; i < body.getJSONArray("evidence").length(); i++) {
 				switch(body.getJSONArray("evidence").getString(i)){
 				case "DOTS_Projector":
-					evidence.add(Evidence.DOTS_Projetor);
+					evidence.add(Evidence.DOTS_Projector);
 					break;
 				case "EMF_5":
 					evidence.add(Evidence.EMF_5);
