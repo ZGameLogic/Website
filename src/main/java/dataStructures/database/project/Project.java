@@ -1,4 +1,4 @@
-package dataStructures.database;
+package dataStructures.database.project;
 
 import lombok.Getter;
 import lombok.ToString;

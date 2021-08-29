@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import application.App;
-import dataStructures.database.Project;
-import dataStructures.database.ProjectRepository;
+import dataStructures.database.project.Project;
+import dataStructures.database.project.ProjectRepository;
 import dataStructures.json.Repositories.Value;
 import interfaces.WebRequester;
 
