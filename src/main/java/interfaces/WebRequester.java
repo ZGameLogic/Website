@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import dataStructures.json.Build;
 import dataStructures.json.Commits;
 import dataStructures.json.Repositories;
 
@@ -96,6 +97,26 @@ public class WebRequester {
             System.out.println(e.getMessage());
         }
 		return null;
+	}
+	
+	public static Build getBitbucketCommitBuildStatus(String apiKey, String commitID) {
+		HttpClient httpclient = HttpClients.createDefault();
+        try {
+            URIBuilder builder = new URIBuilder("https://zgamelogic.com:7990/rest/build-status/1.0/commits/" + commitID);
+            URI uri = builder.build();
+            HttpGet request = new HttpGet(uri);
+            request.setHeader("Authorization", "Basic " + encodedAuthorization(apiKey));
+            HttpResponse response = httpclient.execute(request);
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+        		ObjectMapper objectMapper = new ObjectMapper();
+        		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        		return objectMapper.readValue(EntityUtils.toString(entity), Build.class);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
 	}
 	
 	public static String getBitbucketRepoWebInfo(String repoSlug, String apiKey) {
