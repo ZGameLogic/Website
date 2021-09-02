@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import application.App;
 import dataStructures.database.project.Project;
 import dataStructures.database.project.ProjectRepository;
+import dataStructures.json.Build;
+import dataStructures.json.Commits;
 import dataStructures.json.Repositories.Value;
 import interfaces.WebRequester;
 
@@ -35,7 +37,29 @@ public class ProjectsController {
 			String description = current.getDescription();
 			String URL = current.getLinks().getSelf().get(0).getHref();
 			String info = WebRequester.getBitbucketRepoWebInfo(current.getSlug(), App.getConfig().getBitbucketAPIKey());
-			projects.add(new Project(0, name, description, URL, info, WebRequester.getBitbucketRepoCommits(App.getConfig().getBitbucketAPIKey(), current.getSlug())));
+			Commits commits = WebRequester.getBitbucketRepoCommits(App.getConfig().getBitbucketAPIKey(), current.getSlug());
+			/*
+			if(commits.getValues() != null) {
+				for(dataStructures.json.Commits.Value v : commits.getValues()) {
+					Build build = WebRequester.getBitbucketCommitBuildStatus(App.getConfig().getBitbucketAPIKey(), v.getId());
+					if(build.getValues() != null && build.getSize() > 0) {
+						String buildState = build.getValues().get(0).getState();
+						switch(buildState) {
+							case "SUCCESSFUL":
+								v.setState(1);
+								break;
+							case "FAILED":
+								v.setState(2);
+								break;
+							default:
+								v.setState(0);
+								break;
+						}
+					}
+				}
+			}
+			*/
+			projects.add(new Project(0, name, description, URL, info, commits));
 		}
 		// Get all the additions from the database
 		projects.addAll(dbProjects.findAll());

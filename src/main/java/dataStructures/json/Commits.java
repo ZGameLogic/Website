@@ -1,11 +1,14 @@
 package dataStructures.json;
 import java.util.List;
 
+import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
@@ -97,6 +100,10 @@ public class Commits{
         public String message;
         public List<Parent> parents;
         public Properties properties;
+        
+        @Transient
+        @Setter
+    	private int state;
     }
 }
 
