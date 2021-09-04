@@ -1,4 +1,4 @@
-package dataStructures.database.ghost;
+package dataStructures.database.ghosty.ghost;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +10,7 @@ import javax.persistence.Table;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import dataStructures.database.ToJSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Ghost {
+public class Ghost extends ToJSONObject {
 
 
     @Id
@@ -34,15 +32,6 @@ public class Ghost {
 	@Column(name = "description", length = 5000)
 	private String description;
 	private String evidence;
-	
-	public JSONObject toJSONObject() {
-		try {
-			return new JSONObject(new ObjectMapper().writeValueAsString(this));
-		} catch (JsonProcessingException | JSONException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 
 	public Ghost(JSONObject body) {
 		try {

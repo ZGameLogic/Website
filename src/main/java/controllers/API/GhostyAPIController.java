@@ -15,14 +15,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import application.App;
-import dataStructures.database.ghost.Ghost;
-import dataStructures.database.ghost.GhostRepository;
+import dataStructures.database.ghosty.aspect.Aspect;
+import dataStructures.database.ghosty.aspect.AspectRepository;
+import dataStructures.database.ghosty.ghost.Ghost;
+import dataStructures.database.ghosty.ghost.GhostRepository;
 
 @Controller
 public class GhostyAPIController {
 	
 	@Autowired
 	private GhostRepository ghosts;
+	
+	@Autowired
+	private AspectRepository aspects;
 	
 	@GetMapping("api/getGhosts")
 	public ResponseEntity<String> getAllGhosts() {
@@ -33,6 +38,21 @@ public class GhostyAPIController {
 				ghostsArray.put(current.toJSONObject());
 			}
 			returnBody.put("ghosts", ghostsArray);
+			return ResponseEntity.ok(returnBody.toString());
+		} catch (JSONException e) {
+			return ResponseEntity.ok("Invalid JSON format");
+		}
+	}
+	
+	@GetMapping("api/getAspects")
+	public ResponseEntity<String> getAllAspects() {
+		try {
+			JSONObject returnBody = new JSONObject();
+			JSONArray aspectsArray = new JSONArray();
+			for(Aspect current : aspects.findAll()) {
+				aspectsArray.put(current.toJSONObject());
+			}
+			returnBody.put("aspects", aspectsArray);
 			return ResponseEntity.ok(returnBody.toString());
 		} catch (JSONException e) {
 			return ResponseEntity.ok("Invalid JSON format");
@@ -81,6 +101,25 @@ public class GhostyAPIController {
 		}
 	}
 	
+	@PostMapping("api/deleteAspect")
+	public ResponseEntity<String> deleteAspect(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
+		try {
+			JSONObject body = new JSONObject(bodyString);
+			if(validateKey(key)) {
+				if(body.has("id")) {
+					aspects.deleteById(body.getInt("id"));
+					return ResponseEntity.ok("Aspect deleted");
+				}
+				return ResponseEntity.ok("Invalid id");
+			}
+			return ResponseEntity.ok("Invalid apiKey");
+		} catch (JSONException e) {
+			return ResponseEntity.ok("Invalid JSON format");
+		} catch (IllegalArgumentException e1) {
+			return ResponseEntity.ok("Invalid project id");
+		}
+	}
+	
 	@PostMapping("api/createGhost")
 	public ResponseEntity<String> createGhost(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
 		try {
@@ -99,6 +138,24 @@ public class GhostyAPIController {
 		}
 	}
 	
+	@PostMapping("api/createAspect")
+	public ResponseEntity<String> createAspect(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
+		try {
+			JSONObject body = new JSONObject(bodyString);
+			if(validateKey(key)) {
+				if(body.has("name") && body.has("content")) {
+					Aspect newAspect = new Aspect(body);
+					aspects.save(newAspect);
+					return ResponseEntity.ok("Content added");
+				}
+				return ResponseEntity.ok("Content not added! We need content and name");
+			}
+			return ResponseEntity.ok("Invalid apiKey");
+		} catch (JSONException e) {
+			return ResponseEntity.ok("Invalid JSON format");
+		}
+	}
+	
 	@PostMapping("api/editGhost")
 	public ResponseEntity<String> editGhost(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
 		try {
@@ -109,6 +166,23 @@ public class GhostyAPIController {
 				oldGhost.setGhost(newGhost);
 				ghosts.save(oldGhost);
 				return ResponseEntity.ok("Ghost edited");
+			}
+			return ResponseEntity.ok("Invalid apiKey");
+		} catch (JSONException e) {
+			return ResponseEntity.ok("Invalid JSON format");
+		}
+	}
+	
+	@PostMapping("api/editAspect")
+	public ResponseEntity<String> editAspect(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
+		try {
+			JSONObject body = new JSONObject(bodyString);
+			if(validateKey(key)) {
+				Aspect newAspect = new Aspect(body);
+				Aspect oldAspect = aspects.getOne(newAspect.getId());
+				oldAspect.setAspect(newAspect);
+				aspects.save(oldAspect);
+				return ResponseEntity.ok("Aspect edited");
 			}
 			return ResponseEntity.ok("Invalid apiKey");
 		} catch (JSONException e) {

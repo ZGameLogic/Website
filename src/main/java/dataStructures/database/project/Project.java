@@ -14,9 +14,7 @@ import javax.persistence.Transient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import dataStructures.database.ToJSONObject;
 import dataStructures.json.Commits;
 import lombok.AllArgsConstructor;
 
@@ -25,7 +23,7 @@ import lombok.AllArgsConstructor;
 @ToString
 @Entity
 @Table(name = "Projects")
-public class Project {
+public class Project extends ToJSONObject {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,15 +61,6 @@ public class Project {
 		} else {
 			throw new JSONException("No key name in JSONObject");
 		}
-	}
-	
-	public JSONObject toJSONObject() {
-		try {
-			return new JSONObject(new ObjectMapper().writeValueAsString(this));
-		} catch (JsonProcessingException | JSONException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 	
 	public void setProject(Project p) {
