@@ -30,18 +30,15 @@ public class APIController {
 	private GhostRepository ghosts;
 	
 	@GetMapping("api/getProjects")
-	public ResponseEntity<String> getAllProjects(@RequestHeader(value="apiKey") String key) {
+	public ResponseEntity<String> getAllProjects() {
 		try {
-			if(validateKey(key)) {
-				JSONObject returnBody = new JSONObject();
-				JSONArray projects = new JSONArray();
-				for(Project current : dbProjects.findAll()) {
-					projects.put(current.toJSONObject());
-				}
-				returnBody.put("projects", projects);
-				return ResponseEntity.ok(returnBody.toString());
+			JSONObject returnBody = new JSONObject();
+			JSONArray projects = new JSONArray();
+			for(Project current : dbProjects.findAll()) {
+				projects.put(current.toJSONObject());
 			}
-			return ResponseEntity.ok("Invalid apiKey");
+			returnBody.put("projects", projects);
+			return ResponseEntity.ok(returnBody.toString());
 		} catch (JSONException e) {
 			return ResponseEntity.ok("Invalid JSON format");
 		}
@@ -99,44 +96,38 @@ public class APIController {
 	}
 	
 	@GetMapping("api/getGhosts")
-	public ResponseEntity<String> getAllGhosts(@RequestHeader(value="apiKey") String key) {
+	public ResponseEntity<String> getAllGhosts() {
 		try {
-			if(validateKey(key)) {
-				JSONObject returnBody = new JSONObject();
-				JSONArray ghostsArray = new JSONArray();
-				for(Ghost current : ghosts.findAll()) {
-					ghostsArray.put(current.toJSONObject());
-				}
-				returnBody.put("ghosts", ghostsArray);
-				return ResponseEntity.ok(returnBody.toString());
+			JSONObject returnBody = new JSONObject();
+			JSONArray ghostsArray = new JSONArray();
+			for(Ghost current : ghosts.findAll()) {
+				ghostsArray.put(current.toJSONObject());
 			}
-			return ResponseEntity.ok("Invalid apiKey");
+			returnBody.put("ghosts", ghostsArray);
+			return ResponseEntity.ok(returnBody.toString());
 		} catch (JSONException e) {
 			return ResponseEntity.ok("Invalid JSON format");
 		}
 	}
 	
 	@GetMapping("api/getEvidence")
-	public ResponseEntity<String> getAllEvidence(@RequestHeader(value="apiKey") String key) {
+	public ResponseEntity<String> getAllEvidence() {
 		try {
-			if(validateKey(key)) {
-				JSONObject returnBody = new JSONObject();				
-				Set<String> types = new HashSet<String>();
+			JSONObject returnBody = new JSONObject();				
+			Set<String> types = new HashSet<String>();
 				
-				System.out.println(ghosts.findAll().size());
+			System.out.println(ghosts.findAll().size());
 				
-				for(Ghost current : ghosts.findAll()) {
-					for(String x : current.getEvidence().split(",")) {
-						types.add(x);
-					}
+			for(Ghost current : ghosts.findAll()) {
+				for(String x : current.getEvidence().split(",")) {
+					types.add(x);
 				}
-				
-				JSONArray ghostsArray = new JSONArray(types);
-				
-				returnBody.put("evidence", ghostsArray);
-				return ResponseEntity.ok(returnBody.toString());
 			}
-			return ResponseEntity.ok("Invalid apiKey");
+				
+			JSONArray ghostsArray = new JSONArray(types);
+				
+			returnBody.put("evidence", ghostsArray);
+			return ResponseEntity.ok(returnBody.toString());
 		} catch (JSONException e) {
 			return ResponseEntity.ok("Invalid JSON format");
 		}
