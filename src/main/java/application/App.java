@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import data.ConfigLoader;
 import lombok.Getter;
 
-@SpringBootApplication(scanBasePackages = {"controllers", "dataStructures"})
+@SpringBootApplication(scanBasePackages = {"controllers", "dataStructures", "services"})
 @EnableJpaRepositories({"dataStructures"})
 @EntityScan({"dataStructures"})
 public class App {

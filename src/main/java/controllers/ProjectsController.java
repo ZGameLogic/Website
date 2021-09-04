@@ -17,7 +17,7 @@ import dataStructures.database.project.Project;
 import dataStructures.database.project.ProjectRepository;
 import dataStructures.json.Commits;
 import dataStructures.json.Repositories.Value;
-import interfaces.WebRequester;
+import services.WebRequester;
 
 @Controller
 public class ProjectsController {
