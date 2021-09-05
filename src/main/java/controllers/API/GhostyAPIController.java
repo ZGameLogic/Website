@@ -69,7 +69,9 @@ public class GhostyAPIController {
 				
 			for(Ghost current : ghosts.findAll()) {
 				for(String x : current.getEvidence().split(",")) {
-					types.add(x);
+					if(!x.equals("")) {
+						types.add(x);
+					}
 				}
 			}
 				
