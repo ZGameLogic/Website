@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -104,39 +105,33 @@ public class GhostyAPIController {
 		}
 	}
 	
-	@DeleteMapping("Ghosts")
-	public ResponseEntity<String> deleteGhost(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
+	@DeleteMapping("Ghosts/{ghostID:.+}")
+	public ResponseEntity<String> deleteGhost(@RequestHeader(value="apiKey") String key, @PathVariable("ghostID") int ghostID) {
 		try {
-			JSONObject body = new JSONObject(bodyString);
 			if(validateKey(key)) {
-				if(body.has("id")) {
-					ghosts.deleteById(body.getInt("id"));
+				if(ghosts.existsById(ghostID)){
+					ghosts.deleteById(ghostID);
 					return ResponseEntity.ok("Ghost deleted");
 				}
-				return ResponseEntity.ok("Invalid id");
+				
 			}
 			return ResponseEntity.ok("Invalid apiKey");
-		} catch (JSONException e) {
-			return ResponseEntity.ok("Invalid JSON format");
-		} catch (IllegalArgumentException e1) {
+		} catch (IllegalArgumentException e) {
 			return ResponseEntity.ok("Invalid project id");
 		}
 	}
 	
-	@DeleteMapping("Aspects")
-	public ResponseEntity<String> deleteAspect(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
+	@DeleteMapping("Aspects/{aspectID:.+}")
+	public ResponseEntity<String> deleteAspect(@RequestHeader(value="apiKey") String key, @PathVariable("aspectID") int aspectID) {
 		try {
-			JSONObject body = new JSONObject(bodyString);
 			if(validateKey(key)) {
-				if(body.has("id")) {
-					aspects.deleteById(body.getInt("id"));
+				if(aspects.existsById(aspectID)) {
+					aspects.deleteById(aspectID);
 					return ResponseEntity.ok("Aspect deleted");
 				}
 				return ResponseEntity.ok("Invalid id");
 			}
 			return ResponseEntity.ok("Invalid apiKey");
-		} catch (JSONException e) {
-			return ResponseEntity.ok("Invalid JSON format");
 		} catch (IllegalArgumentException e1) {
 			return ResponseEntity.ok("Invalid project id");
 		}
