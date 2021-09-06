@@ -9,10 +9,12 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import application.App;
 import dataStructures.database.ghosty.aspect.Aspect;
@@ -21,6 +23,7 @@ import dataStructures.database.ghosty.ghost.Ghost;
 import dataStructures.database.ghosty.ghost.GhostRepository;
 
 @Controller
+@RequestMapping("api/ghosty/")
 public class GhostyAPIController {
 	
 	@Autowired
@@ -29,7 +32,7 @@ public class GhostyAPIController {
 	@Autowired
 	private AspectRepository aspects;
 	
-	@GetMapping("api/getGhosts")
+	@GetMapping("Ghosts")
 	public ResponseEntity<String> getAllGhosts() {
 		try {
 			JSONObject returnBody = new JSONObject();
@@ -44,7 +47,7 @@ public class GhostyAPIController {
 		}
 	}
 	
-	@GetMapping("api/getAspects")
+	@GetMapping("Aspects")
 	public ResponseEntity<String> getAllAspects() {
 		try {
 			JSONObject returnBody = new JSONObject();
@@ -59,13 +62,30 @@ public class GhostyAPIController {
 		}
 	}
 	
-	@GetMapping("api/getEvidence")
-	public ResponseEntity<String> getAllEvidence() {
+	@GetMapping("AspectTypes")
+	public ResponseEntity<String> getAllAspectTypes() {
 		try {
 			JSONObject returnBody = new JSONObject();				
 			Set<String> types = new HashSet<String>();
 				
-			System.out.println(ghosts.findAll().size());
+			for(Aspect current : aspects.findAll()) {
+				types.add(current.getType());
+			}
+				
+			JSONArray aspectTypesArray = new JSONArray(types);
+				
+			returnBody.put("aspectTypes", aspectTypesArray);
+			return ResponseEntity.ok(returnBody.toString());
+		} catch (JSONException e) {
+			return ResponseEntity.ok("Invalid JSON format");
+		}
+	}
+	
+	@GetMapping("Evidence")
+	public ResponseEntity<String> getAllEvidence() {
+		try {
+			JSONObject returnBody = new JSONObject();				
+			Set<String> types = new HashSet<String>();
 				
 			for(Ghost current : ghosts.findAll()) {
 				for(String x : current.getEvidence().split(",")) {
@@ -84,7 +104,7 @@ public class GhostyAPIController {
 		}
 	}
 	
-	@PostMapping("api/deleteGhost")
+	@DeleteMapping("Ghosts")
 	public ResponseEntity<String> deleteGhost(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
 		try {
 			JSONObject body = new JSONObject(bodyString);
@@ -103,7 +123,7 @@ public class GhostyAPIController {
 		}
 	}
 	
-	@PostMapping("api/deleteAspect")
+	@DeleteMapping("Aspects")
 	public ResponseEntity<String> deleteAspect(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
 		try {
 			JSONObject body = new JSONObject(bodyString);
@@ -122,17 +142,17 @@ public class GhostyAPIController {
 		}
 	}
 	
-	@PostMapping("api/createGhost")
-	public ResponseEntity<String> createGhost(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
+	@PostMapping("Ghosts")
+	public ResponseEntity<String> saveGhost(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
 		try {
 			JSONObject body = new JSONObject(bodyString);
 			if(validateKey(key)) {
 				if(body.has("evidence") && body.has("name") && body.has("description")) {
 					Ghost newGhost = new Ghost(body);
 					ghosts.save(newGhost);
-					return ResponseEntity.ok("Ghost added");
+					return ResponseEntity.ok("Ghost saved");
 				}
-				return ResponseEntity.ok("Ghost not added! We need evidence, name, and decription");
+				return ResponseEntity.ok("Ghost not saved! We need evidence, name, and decription");
 			}
 			return ResponseEntity.ok("Invalid apiKey");
 		} catch (JSONException e) {
@@ -140,58 +160,23 @@ public class GhostyAPIController {
 		}
 	}
 	
-	@PostMapping("api/createAspect")
-	public ResponseEntity<String> createAspect(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
+	@PostMapping("Aspects")
+	public ResponseEntity<String> saveAspect(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
 		try {
 			JSONObject body = new JSONObject(bodyString);
 			if(validateKey(key)) {
-				if(body.has("name") && body.has("content")) {
+				if(body.has("name") && body.has("content") && body.has("type")) {
 					Aspect newAspect = new Aspect(body);
 					aspects.save(newAspect);
-					return ResponseEntity.ok("Content added");
+					return ResponseEntity.ok("Content saved");
 				}
-				return ResponseEntity.ok("Content not added! We need content and name");
+				return ResponseEntity.ok("Content not saved! We need content, type and name");
 			}
 			return ResponseEntity.ok("Invalid apiKey");
 		} catch (JSONException e) {
 			return ResponseEntity.ok("Invalid JSON format");
 		}
-	}
-	
-	@PostMapping("api/editGhost")
-	public ResponseEntity<String> editGhost(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
-		try {
-			JSONObject body = new JSONObject(bodyString);
-			if(validateKey(key)) {
-				Ghost newGhost = new Ghost(body);
-				Ghost oldGhost = ghosts.getOne(newGhost.getId());
-				oldGhost.setGhost(newGhost);
-				ghosts.save(oldGhost);
-				return ResponseEntity.ok("Ghost edited");
-			}
-			return ResponseEntity.ok("Invalid apiKey");
-		} catch (JSONException e) {
-			return ResponseEntity.ok("Invalid JSON format");
-		}
-	}
-	
-	@PostMapping("api/editAspect")
-	public ResponseEntity<String> editAspect(@RequestHeader(value="apiKey") String key, @RequestBody String bodyString) {
-		try {
-			JSONObject body = new JSONObject(bodyString);
-			if(validateKey(key)) {
-				Aspect newAspect = new Aspect(body);
-				Aspect oldAspect = aspects.getOne(newAspect.getId());
-				oldAspect.setAspect(newAspect);
-				aspects.save(oldAspect);
-				return ResponseEntity.ok("Aspect edited");
-			}
-			return ResponseEntity.ok("Invalid apiKey");
-		} catch (JSONException e) {
-			return ResponseEntity.ok("Invalid JSON format");
-		}
-	}
-	
+	}	
 	
 	private boolean validateKey(String key) {
 		return key.equals(App.getConfig().getWebsiteApi());

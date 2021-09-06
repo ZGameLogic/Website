@@ -30,6 +30,7 @@ public class Aspect extends ToJSONObject {
     private String name;
     @Lob
     private String content;
+    private String type;
 
     public Aspect(JSONObject body) {
     	try {
@@ -41,6 +42,7 @@ public class Aspect extends ToJSONObject {
 		try {
 			name = body.getString("name");
 			content = body.getString("content");
+			type = body.getString("type");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -49,5 +51,6 @@ public class Aspect extends ToJSONObject {
     public void setAspect(Aspect aspect) {
     	this.name = aspect.name;
     	this.content = aspect.content;
+    	this.type = aspect.type;
     }
 }
