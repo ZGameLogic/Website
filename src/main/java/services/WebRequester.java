@@ -149,6 +149,37 @@ public class WebRequester {
 		return null;
 	}
 	
+	public static String getBitbucketRepoPomVersion(String repoSlug, String apiKey) {
+		HttpClient httpclient = HttpClients.createDefault();
+        try {
+            URIBuilder builder = new URIBuilder("https://zgamelogic.com:7990/rest/api/1.0/projects/BSPR/repos/" + repoSlug + "/browse/pom.xml");
+            URI uri = builder.build();
+            HttpGet request = new HttpGet(uri);
+            request.setHeader("Authorization", "Basic " + encodedAuthorization(apiKey));
+            HttpResponse response = httpclient.execute(request);
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+            	String info = "";
+            	JSONObject result = new JSONObject(EntityUtils.toString(entity));
+            	if(result.has("lines")) {
+            		JSONArray jsonInfo = result.getJSONArray("lines");
+            		
+                	for(int i = 0; i < jsonInfo.length(); i++) {
+                		if(jsonInfo.getJSONObject(i).getString("text").contains("<version>")) {
+                			return jsonInfo.getJSONObject(i).getString("text").replace("<version>", "").replace("</version>", "").replace("\t", "");
+                		}
+                		info += jsonInfo.getJSONObject(i).getString("text") + "\n";
+                	}
+            	}
+            	
+                return info;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+		return null;
+	}
+	
 	private static String encodedAuthorization(String apiKey) {
 		String plainCreds = apiKey;
 	    byte[] plainCredsBytes = plainCreds.getBytes();

@@ -22,6 +22,7 @@ import dataStructures.database.ghosty.aspect.Aspect;
 import dataStructures.database.ghosty.aspect.AspectRepository;
 import dataStructures.database.ghosty.ghost.Ghost;
 import dataStructures.database.ghosty.ghost.GhostRepository;
+import services.WebRequester;
 
 @Controller
 @RequestMapping("api/ghosty/")
@@ -52,7 +53,7 @@ public class GhostyAPIController {
 	public ResponseEntity<String> getVersion() {
 		JSONObject returnBody = new JSONObject();
 		try {
-			returnBody.put("version", "0.0.5");
+			returnBody.put("version", WebRequester.getBitbucketRepoPomVersion("ghosty", App.getConfig().getBitbucketAPIKey()));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
