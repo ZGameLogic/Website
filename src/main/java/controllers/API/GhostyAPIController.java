@@ -48,6 +48,17 @@ public class GhostyAPIController {
 		}
 	}
 	
+	@GetMapping("Version")
+	public ResponseEntity<String> getVersion() {
+		JSONObject returnBody = new JSONObject();
+		try {
+			returnBody.put("version", "0.0.5");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(returnBody.toString());
+	}
+	
 	@GetMapping("Aspects")
 	public ResponseEntity<String> getAllAspects() {
 		try {
