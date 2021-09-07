@@ -43,23 +43,19 @@ public class Project extends ToJSONObject {
 		
 	}
 	
-	public Project(JSONObject body) throws JSONException {
-		if(body.has("name")) {
+	public Project(JSONObject body) {
+		try {
+			id = body.getInt("id");
+		} catch (JSONException e) {
+			
+		}
+		try {
 			name = body.getString("name");
-			if(body.has("description")) {
-				description = body.getString("description");
-			}
-			if(body.has("id")) {
-				id = body.getInt("id");
-			}
-			if(body.has("url")) {
-				url = body.getString("url");
-			}
-			if(body.has("websiteInfo")) {
-				websiteInfo = body.getString("websiteInfo");
-			}
-		} else {
-			throw new JSONException("No key name in JSONObject");
+			url = body.getString("url");
+			websiteInfo = body.getString("websiteInfo");
+			description = body.getString("description");
+		} catch (JSONException e) {
+			
 		}
 	}
 	
