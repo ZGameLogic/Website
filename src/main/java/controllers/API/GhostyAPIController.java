@@ -34,6 +34,9 @@ public class GhostyAPIController {
 	@Autowired
 	private AspectRepository aspects;
 	
+	/**
+	 * @return JSONArray of ghosts JSONObjects
+	 */
 	@GetMapping("Ghosts")
 	public ResponseEntity<String> getAllGhosts() {
 		try {
@@ -49,6 +52,10 @@ public class GhostyAPIController {
 		}
 	}
 	
+	/**
+	 * Use this request to get the current released version ghotsy application.
+	 * @return Version for ghosty application
+	 */
 	@GetMapping("Version")
 	public ResponseEntity<String> getVersion() {
 		JSONObject returnBody = new JSONObject();
@@ -60,6 +67,9 @@ public class GhostyAPIController {
 		return ResponseEntity.ok(returnBody.toString());
 	}
 	
+	/**
+	 * @return JSONArray of Aspect JSONObjects
+	 */
 	@GetMapping("Aspects")
 	public ResponseEntity<String> getAllAspects() {
 		try {
@@ -75,6 +85,10 @@ public class GhostyAPIController {
 		}
 	}
 	
+	/**
+	 * Use this request to get a list of aspect types
+	 * @return list of aspect types
+	 */
 	@GetMapping("AspectTypes")
 	public ResponseEntity<String> getAllAspectTypes() {
 		try {
@@ -94,6 +108,9 @@ public class GhostyAPIController {
 		}
 	}
 	
+	/**
+	 * @return A list of evidence
+	 */
 	@GetMapping("Evidence")
 	public ResponseEntity<String> getAllEvidence() {
 		try {
@@ -117,6 +134,11 @@ public class GhostyAPIController {
 		}
 	}
 	
+	/**
+	 * @param key apiKey for the program
+	 * @param ghostID ID of record to be deleted
+	 * @return Response to delete request
+	 */
 	@DeleteMapping("Ghosts/{ghostID:.+}")
 	public ResponseEntity<String> deleteGhost(@RequestHeader(value="apiKey") String key, @PathVariable("ghostID") int ghostID) {
 		try {
@@ -133,6 +155,11 @@ public class GhostyAPIController {
 		}
 	}
 	
+	/**
+	 * @param key apiKey for the program
+	 * @param aspectID ID of record to be deleted
+	 * @return Response to delete request
+	 */
 	@DeleteMapping("Aspects/{aspectID:.+}")
 	public ResponseEntity<String> deleteAspect(@RequestHeader(value="apiKey") String key, @PathVariable("aspectID") int aspectID) {
 		try {
@@ -185,8 +212,8 @@ public class GhostyAPIController {
 		}
 	}	
 	
+	
 	private boolean validateKey(String key) {
 		return key.equals(App.getConfig().getWebsiteApi());
-	}		
-
+	}
 }
