@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link th:href="@{/styles/social.css}" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" th:href="@{assets/images/favicon.png}">
+    <link rel="stylesheet" th:href="@{/styles/gradiant.css}">
+    
+	<title>Ben Shabowski</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
+		role="navigation">
+		<a class="navbar-brand" href="/home">Ben Shabowski</a>
+		<div id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item" th:each="header: ${headers}"><a class="nav-link" th:href="${'/' + #strings.toLowerCase(header)}" th:text="${header}"></a></li>
+			</ul>
+		</div>
+	</nav>
+	
+	<div class="border border-dark rounded middle-align text-center"
+			style="background: #5b555e; max-width: 600px; padding-top: 20px; margin:auto">
+			<form class="form-group" method="POST" th:action="@{/reservations}">
+				<hr>
+				<h4 class="text-center">Invite me to a game</h4>
+				<div class="row">
+					<div class="middle-align text-center">
+						<label for="game">Game:</label>
+						<br> <input type="text" id="game" name="game" required>
+						<br> <label for="who">Who with:</label>
+						<br> <input type="text" id="who" name="who" required>
+						<br> <label	for="date">Date:</label>
+						<br> <input type="date"	id="date" name="date" required>
+						<br> <label for="time">Start time:</label>
+						<br> <input type="time" id="time" name="time" required>
+						<br><br> <input class="btn" type="submit" value="Submit reservation"
+							style="height: 60px; width: 190px; margin-bottom: 30px; background: #835d96;"/>
+					</div>
+					<hr>
+				</div>
+			</form>
+		</div>
+	
+</body>
+</html>
+

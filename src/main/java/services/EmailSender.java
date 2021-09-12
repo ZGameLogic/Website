@@ -17,7 +17,6 @@ public class EmailSender {
 	
 	@PostConstruct
 	private void initMailSender() {
-		System.out.println("constucted");
 		emailSender = this.preConstructEmailSender;
 	}
 	

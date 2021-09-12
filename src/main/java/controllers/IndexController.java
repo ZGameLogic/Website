@@ -33,10 +33,12 @@ public class IndexController {
 	
 	public static void addPages(Model model){
 		LinkedList<String> pages = new LinkedList<String>();
+		
 		pages.add("Home");
 		pages.add("Projects");
 		pages.add("About me");
 		pages.add("Resume");
+		pages.add("Reservations");
 		
 		model.addAttribute("headers", pages);
 	}
