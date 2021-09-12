@@ -28,13 +28,17 @@ public class ReservationController {
 			@RequestParam("game") String game,
 			@RequestParam("who") String who,
 			@RequestParam("date") String date,
-			@RequestParam("time") String time) {
-		Reservation r = new Reservation(null, game, date, who, time);
+			@RequestParam("time") String time,
+			@RequestParam("email") String email) {
+		Reservation r = new Reservation(null, game, date, who, time, email);
 		reservations.save(r);
 		
-		String body = game + "\n" + who + "\n" + date + "\n" + time;
+		String body = "Game: " + game + "\nWho with: " + who + "\nDate: " + date + "\nTime: " + time;
+		String header = "Thank you for your reservation! You will get an email notification if Ben wants to accept"
+				+ " or deny your reservation.\nReservation details:\n";
 		
 		EmailSender.sendSimpleEmail("Reservation request", body, "notification@zgamelogic.com");
+		EmailSender.sendSimpleEmail("Reservation request", header + body, "no-reply@zgamelogic.com");
 		
 		IndexController.addPages(model);
 		return "response";

@@ -24,5 +24,6 @@ public class Reservation {
     private String date;
     private String people;
     private String time;
+    private String email;
 	
 }

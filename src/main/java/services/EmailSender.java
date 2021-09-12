@@ -25,7 +25,7 @@ public class EmailSender {
         message.setFrom(from);
         message.setTo("ben@zgamelogic.com"); 
         message.setSubject(subject); 
-        message.setText(body + "\nThis was submitted via the website");
+        message.setText(body);
         emailSender.send(message);
 	}
 
