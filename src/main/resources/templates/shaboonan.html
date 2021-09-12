@@ -14,17 +14,10 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
 		role="navigation">
-		<a class="navbar-brand" href="/index">Ben Shabowski</a>
+		<a class="navbar-brand" href="/home">Ben Shabowski</a>
 		<div id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="/index">Home
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="/shaboonan">Shaboonan
-						Section</a></li>
-				<li class="nav-item"><a class="nav-link" href="/projects">Projects</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="/aboutme">About me</a></li>
-				<li class="nav-item"><a class="nav-link" href="">Resume</a></li>
+				<li class="nav-item" th:each="header: ${headers}"><a class="nav-link" th:href="${'/' + #strings.toLowerCase(header)}" th:text="${header}"></a></li>
 			</ul>
 		</div>
 	</nav>

@@ -27,6 +27,7 @@ public class ProjectsController {
 
 	@GetMapping("projects")
 	public String main(Model model) {
+		IndexController.addPages(model);
 		LinkedList<Project> projects = new LinkedList<Project>();
 		List<Value> result = WebRequester.getBitbucketRepos(App.getConfig().getBitbucketAPIKey()).getValues();
 
