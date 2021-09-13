@@ -25,7 +25,7 @@ public class IndexController {
 			@RequestParam("subject") String subject,
 			@RequestParam("body") String body, Model model) {
 		
-		EmailSender.sendSimpleEmail(subject, body, from);
+		EmailSender.sendSimpleEmail(subject, body, "ben@zgamelogic.com", from);
 		addPages(model);
 		
 		return "response";

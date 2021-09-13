@@ -20,7 +20,7 @@ public class EmailSender {
 		emailSender = this.preConstructEmailSender;
 	}
 	
-	public static void sendSimpleEmail(String subject, String body, String from) {
+	public static void sendSimpleEmail(String subject, String body, String to, String from) {
 		SimpleMailMessage message = new SimpleMailMessage(); 
         message.setFrom(from);
         message.setTo("ben@zgamelogic.com"); 

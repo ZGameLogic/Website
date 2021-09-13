@@ -37,8 +37,8 @@ public class ReservationController {
 		String header = "Thank you for your reservation! You will get an email notification if Ben wants to accept"
 				+ " or deny your reservation.\nReservation details:\n";
 		
-		EmailSender.sendSimpleEmail("Reservation request", body, "notification@zgamelogic.com");
-		EmailSender.sendSimpleEmail("Reservation request", header + body, "no-reply@zgamelogic.com");
+		EmailSender.sendSimpleEmail("Reservation request", body, "ben@zgamelogic.com", "notification@zgamelogic.com");
+		EmailSender.sendSimpleEmail("Reservation request", header + body, email, "no-reply@zgamelogic.com");
 		
 		IndexController.addPages(model);
 		return "response";
