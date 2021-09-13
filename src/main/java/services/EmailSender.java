@@ -23,7 +23,7 @@ public class EmailSender {
 	public static void sendSimpleEmail(String subject, String body, String to, String from) {
 		SimpleMailMessage message = new SimpleMailMessage(); 
         message.setFrom(from);
-        message.setTo("ben@zgamelogic.com"); 
+        message.setTo(to); 
         message.setSubject(subject); 
         message.setText(body);
         emailSender.send(message);

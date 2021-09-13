@@ -35,7 +35,7 @@ public class ReservationController {
 		
 		String body = "Game: " + game + "\nWho with: " + who + "\nDate: " + date + "\nTime: " + time;
 		String header = "Thank you for your reservation! You will get an email notification if Ben wants to accept"
-				+ " or deny your reservation.\nReservation details:\n";
+				+ " or deny your reservation.\n\nReservation details:\n";
 		
 		EmailSender.sendSimpleEmail("Reservation request", body, "ben@zgamelogic.com", "notification@zgamelogic.com");
 		EmailSender.sendSimpleEmail("Reservation request", header + body, email, "no-reply@zgamelogic.com");
