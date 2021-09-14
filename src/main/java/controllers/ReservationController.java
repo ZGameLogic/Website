@@ -1,8 +1,5 @@
 package controllers;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import dataStructures.database.reservation.Reservation;
 import dataStructures.database.reservation.ReservationRepository;
-import dataStructures.database.websiteInfo.WebsiteInfo;
 import dataStructures.database.websiteInfo.WebsiteInfoRepository;
 import services.EmailSender;
 
@@ -27,14 +23,6 @@ public class ReservationController {
 	
 	@GetMapping("/reservations")
 	public String reservation(Model model) {
-		if(webInf.count() == 0) {
-			List<String> games = new LinkedList<String>();
-			games.add("Hunt: Showdown");
-			games.add("Phasmophobia");
-			games.add("Sea of Thieves");
-			WebsiteInfo w = new WebsiteInfo("games", games);
-			webInf.save(w);
-		}
 		model.addAttribute("games", webInf.findById("games").get());
 		IndexController.addPages(model);
 		return "reservations";
