@@ -1,8 +1,5 @@
 package dataStructures.database.websiteInfo;
 
-import java.util.List;
-
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -22,8 +19,6 @@ public class WebsiteInfo {
 	
 	@Id
 	private String name;
-	
-	@ElementCollection
-	private List<String> information;
+	private String information;
 
 }

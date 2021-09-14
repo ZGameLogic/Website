@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +26,8 @@ public class ReservationController {
 	
 	@GetMapping("/reservations")
 	public String reservation(Model model) {
-		model.addAttribute("games", webInf.findById("games").get());
+		List<String> games = Arrays.asList(webInf.findById("games").get().getInformation().split(","));
+		model.addAttribute("games", games);
 		IndexController.addPages(model);
 		return "reservations";
 	}

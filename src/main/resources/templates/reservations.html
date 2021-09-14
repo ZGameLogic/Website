@@ -33,7 +33,7 @@
 						<br> <input type="email" id="email" name="email" required>
 						<br><br> <label for="game">Game:</label>
 						<select id="game" name="game" style="max-width: 300px;">
-								<option th:each="game: ${games.information}" th:text="${game}"></option>
+								<option th:each="game: ${games}" th:text="${game}"></option>
 						</select>
 						<br> <label for="who">Who with:</label>
 						<br> <input type="text" id="who" name="who" required>
