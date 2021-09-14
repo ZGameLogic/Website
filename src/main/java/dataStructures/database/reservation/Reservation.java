@@ -25,6 +25,9 @@ public class Reservation {
     private String people;
     private String time;
     private String email;
+    // This is a fake ID the user will use to update the reservation
     private long reservationID;
+    // 0 needs reviewing, 1 approved, 2 is denied
+    private int status;
 	
 }

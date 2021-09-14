@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,16 +12,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import dataStructures.database.reservation.Reservation;
 import dataStructures.database.reservation.ReservationRepository;
+import dataStructures.database.websiteInfo.WebsiteInfo;
+import dataStructures.database.websiteInfo.WebsiteInfoRepository;
 import services.EmailSender;
 
 @Controller
 public class ReservationController {
 
 	@Autowired
-	ReservationRepository reservations;
+	private ReservationRepository reservations;
+	
+	@Autowired
+	private WebsiteInfoRepository webInf;
 	
 	@GetMapping("/reservations")
 	public String reservation(Model model) {
+		if(webInf.count() == 0) {
+			List<String> games = new LinkedList<String>();
+			games.add("Hunt: Showdown");
+			games.add("Phasmophobia");
+			games.add("Sea of Thieves");
+			WebsiteInfo w = new WebsiteInfo("games", games);
+			webInf.save(w);
+		}
+		model.addAttribute("games", webInf.findById("games").get());
 		IndexController.addPages(model);
 		return "reservations";
 	}
@@ -30,7 +47,7 @@ public class ReservationController {
 			@RequestParam("date") String date,
 			@RequestParam("time") String time,
 			@RequestParam("email") String email) {
-		Reservation r = new Reservation(null, game, date, who, time, email, System.currentTimeMillis());
+		Reservation r = new Reservation(null, game, date, who, time, email, System.currentTimeMillis(), 0);
 		reservations.save(r);
 		
 		String body = "Game: " + game + "\nWho with: " + who + "\nDate: " + date + "\nTime: " + time;

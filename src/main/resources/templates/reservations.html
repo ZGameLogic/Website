@@ -33,6 +33,7 @@
 						<br> <input type="email" id="email" name="email" required>
 						<br><br> <label for="game">Game:</label>
 						<select id="game" name="game" style="max-width: 300px;">
+								<option th:each="game: ${games.information}" th:text="${game}"></option>
 								<option>Hunt: Showdown</option>
 								<option>Sea of Thieves</option>
 								<option>Phasmophobia</option>

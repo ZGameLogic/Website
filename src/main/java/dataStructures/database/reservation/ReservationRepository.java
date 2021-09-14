@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 	
-	@Query("SELECT u FROM Reservations WHERE ")
-	public Collection<Reservation> getUpcomingReservation();
+//	@Query("SELECT r FROM Reservations r WHERE r.status < 2")
+//	public Collection<Reservation> getValidReservations();
 
 }
