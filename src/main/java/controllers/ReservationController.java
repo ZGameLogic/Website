@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class ReservationController {
 	public String reservation(Model model) {
 		List<String> games = Arrays.asList(webInf.findById("games").get().getInformation().split(","));
 		model.addAttribute("games", games);
+		List<Reservation> res = reservations.getValidReservations();
+		Collections.sort(res);
+		model.addAttribute("reservations", res);
 		IndexController.addPages(model);
 		return "reservations";
 	}

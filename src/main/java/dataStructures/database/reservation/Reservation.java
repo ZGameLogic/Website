@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "Reservations")
-public class Reservation {
+public class Reservation implements Comparable<Reservation> {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,5 +31,13 @@ public class Reservation {
     private long reservationID;
     // 0 needs reviewing, 1 approved, 2 is denied
     private int status;
+	@Override
+	public int compareTo(Reservation o) {
+		if(o.getDate().equals(date)) {
+			return time.compareTo(o.getTime());
+		} else {
+			return date.compareTo(o.getDate());
+		}
+	}
 	
 }
