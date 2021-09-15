@@ -28,6 +28,7 @@ public class ReservationController {
 	@GetMapping("/reservations")
 	public String reservation(Model model) {
 		List<String> games = Arrays.asList(webInf.findById("games").get().getInformation().split(","));
+		Collections.sort(games);
 		model.addAttribute("games", games);
 		List<Reservation> res = reservations.getValidReservations();
 		Collections.sort(res);
@@ -42,6 +43,7 @@ public class ReservationController {
 		model.addAttribute("reservation", r);
 		IndexController.addPages(model);
 		List<String> games = Arrays.asList(webInf.findById("games").get().getInformation().split(","));
+		Collections.sort(games);
 		model.addAttribute("games", games);
 		return "editReservation";
 	}
