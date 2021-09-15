@@ -36,6 +36,13 @@ public class ReservationController {
 		return "reservations";
 	}
 	
+	@GetMapping("/reservations/edit")
+	public String editReservation(Model model, @RequestParam("id") String reservationID) {
+		model.addAttribute("reservation", reservations.getReservationByFakeID(Long.parseLong(reservationID)));
+		IndexController.addPages(model);
+		return "editReservation";
+	}
+	
 	@PostMapping("/reservations")
 	public String makeReservation(Model model,
 			@RequestParam("game") String game,

@@ -31,6 +31,7 @@ public class Reservation implements Comparable<Reservation> {
     private long reservationID;
     // 0 needs reviewing, 1 approved, 2 is denied
     private int status;
+    
 	@Override
 	public int compareTo(Reservation o) {
 		if(o.getDate().equals(date)) {

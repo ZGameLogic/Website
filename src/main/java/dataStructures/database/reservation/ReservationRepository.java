@@ -14,5 +14,11 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 	 */
 	@Query(value = "SELECT * FROM reservations r WHERE r.status < 2", nativeQuery = true)
 	public List<Reservation> getValidReservations();
+	
+	/**
+	 * @return A reservation with an reservationId
+	 */
+	@Query(value = "SELECT * FROM reservations WHERE reservationid = ?1", nativeQuery = true)
+	public Reservation getReservationByFakeID(Long reservationID);
 
 }
