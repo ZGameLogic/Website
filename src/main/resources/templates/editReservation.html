@@ -31,5 +31,44 @@
 			</ul>
 		</div>
 	</nav>
+	<div class="border border-dark rounded"
+		style="background: #5b555e; max-width: 600px; padding-top: 20px; margin: auto">
+		<form class="form-group" method="POST" th:action="@{/reservations/edit}">
+			<hr>
+			<h4 class="text-center">Edit reservation</h4>
+			<div class="row">
+				<div class="middle-align text-center">
+					<label for="game">Game:</label> 
+					<select id="game" name="game" style="max-width: 300px;">
+						<option th:each="game: ${games}" th:selected="${reservation.game == game}" th:text="${game}"></option>
+					</select> 
+					<br>
+					<input class="" type="hidden" th:value="${reservation.id}" id="id" name="id"/>
+					<label for="who">Who with:</label> 
+					<br> 
+					<input type="text" th:value="${reservation.people}" id="who" name="who" required>
+					<br>
+					<label for="date">Date:</label>
+					<br>
+					<input type="date" th:value="${reservation.date}" id="date" name="date" required>
+					<br> 
+					<label for="time">Start time:</label>
+					<br>
+					<input type="time" id="time" th:value="${reservation.time}" name="time" required>
+					<br><br>
+					<input class="btn" type="submit" value="Submit changes"
+						style="height: 60px; width: 190px; margin-bottom: 30px; background: #835d96;" />
+				</div>
+				<hr>
+			</div>
+		</form>
+		<form class="form-group" method="POST" th:action="@{/reservations/delete}">
+		<div class="middle-align text-center">
+			<input class="" type="hidden" th:value="${reservation.id}" id="id" name="id"/>
+			<input class="btn" type="submit" value="Delete reservation"
+							style="height: 45px; width: 165px; margin-bottom: 30px; background: #835d96;" />
+		</div>
+		</form>
+	</div>
 </body>
 </html>
