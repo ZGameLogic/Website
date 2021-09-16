@@ -6,6 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import dataStructures.database.ToJSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +23,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "Reservations")
-public class Reservation implements Comparable<Reservation> {
+public class Reservation extends ToJSONObject implements Comparable<Reservation>  {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +44,26 @@ public class Reservation implements Comparable<Reservation> {
 			return time.compareTo(o.getTime());
 		} else {
 			return date.compareTo(o.getDate());
+		}
+	}
+
+	public Reservation(JSONObject body) {
+		try {
+			id = body.getInt("id");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			game = body.getString("game");
+			date = body.getString("date");
+			people = body.getString("people");
+			time = body.getString("time");
+			email = body.getString("email");
+			reservationID = body.getLong("reservationID");
+			status = body.getInt("status");
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 	
