@@ -15,19 +15,19 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class Commits{
-    public List<Value> values;
-    public int size;
-    public boolean isLastPage;
-    public int start;
-    public int limit;
-    public int nextPageStart;
+	private List<Value> values;
+	private int size;
+	private boolean isLastPage;
+	private int start;
+	private int limit;
+	private int nextPageStart;
     
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
     @ToString
     public static class Self{
-        public String href;
+    	private String href;
     }
 
     @AllArgsConstructor
@@ -35,7 +35,7 @@ public class Commits{
     @Getter
     @ToString
     public static class Links{
-        public List<Self> self;
+    	private List<Self> self;
     }
 
     @AllArgsConstructor
@@ -43,14 +43,14 @@ public class Commits{
     @Getter
     @ToString
     public static class Author{
-        public String name;
-        public String emailAddress;
-        public int id;
-        public String displayName;
-        public boolean active;
-        public String slug;
-        public String type;
-        public Links links;
+    	private String name;
+    	private String emailAddress;
+    	private int id;
+    	private String displayName;
+    	private boolean active;
+    	private String slug;
+    	private String type;
+    	private Links links;
     }
 
     @AllArgsConstructor
@@ -58,14 +58,14 @@ public class Commits{
     @Getter
     @ToString
     public static class Committer{
-        public String name;
-        public String emailAddress;
-        public int id;
-        public String displayName;
-        public boolean active;
-        public String slug;
-        public String type;
-        public Links links;
+    	private String name;
+    	private String emailAddress;
+        private int id;
+        private String displayName;
+        private boolean active;
+        private String slug;
+        private String type;
+        private Links links;
     }
 
     @AllArgsConstructor
@@ -73,8 +73,8 @@ public class Commits{
     @Getter
     @ToString
     public static class Parent{
-        public String id;
-        public String displayId;
+    	private String id;
+    	private String displayId;
     }
 
     @AllArgsConstructor
@@ -83,7 +83,7 @@ public class Commits{
     @ToString
     public static class Properties{
         @JsonProperty("jira-key") 
-        public List<String> jiraKey;
+        private List<String> jiraKey;
     }
 
     @AllArgsConstructor
@@ -91,15 +91,15 @@ public class Commits{
     @Getter
     @ToString
     public static class Value{
-        public String id;
-        public String displayId;
-        public Author author;
-        public Object authorTimestamp;
-        public Committer committer;
-        public Object committerTimestamp;
-        public String message;
-        public List<Parent> parents;
-        public Properties properties;
+    	private String id;
+    	private String displayId;
+    	private Author author;
+    	private Object authorTimestamp;
+    	private Committer committer;
+    	private Object committerTimestamp;
+    	private String message;
+        private List<Parent> parents;
+        private Properties properties;
         
         @Transient
         @Setter
