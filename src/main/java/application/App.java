@@ -71,7 +71,7 @@ public class App {
 	
 	private static void loadConfig() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.scan("data");
+		context.scan("dataStructures");
 		context.refresh();
 		config = context.getBean(ConfigLoader.class);
 		context.close();
