@@ -19,7 +19,7 @@ import dataStructures.database.reservation.Reservation;
 import dataStructures.database.reservation.ReservationRepository;
 
 @Controller
-@RequestMapping("api/reservations/")
+@RequestMapping("api/Reservations")
 public class ReservationAPIController {
 	
 	@Autowired
@@ -59,7 +59,7 @@ public class ReservationAPIController {
 		}
 	}
 	
-	@DeleteMapping("{reservationID}")
+	@DeleteMapping("/{reservationID}")
 	public ResponseEntity<String> deleteReservation(
 			@RequestHeader(value="apiKey") String key,
 			@PathVariable("reservationID") int reservationID){
