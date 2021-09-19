@@ -65,6 +65,10 @@ public class Reservation extends ToJSONObject implements Comparable<Reservation>
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		
+		if(reservationID == -1) {
+			reservationID = System.currentTimeMillis();
+		}
 	}
 	
 }
