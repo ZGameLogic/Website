@@ -19,7 +19,7 @@ import dataStructures.database.websiteInfo.WebsiteInfo;
 import dataStructures.database.websiteInfo.WebsiteInfoRepository;
 
 @Controller
-@RequestMapping("api/info/")
+@RequestMapping("api/info")
 public class WebsiteInfoAPIController {
 	
 	@Autowired
@@ -59,7 +59,7 @@ public class WebsiteInfoAPIController {
 		}
 	}
 	
-	@DeleteMapping("{infoID}")
+	@DeleteMapping("/{infoID}")
 	public ResponseEntity<String> deleteReservation(
 			@RequestHeader(value="apiKey") String key,
 			@PathVariable("infoID") String infoID){
