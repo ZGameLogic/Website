@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import application.App;
 import dataStructures.database.reservation.Reservation;
 import dataStructures.database.reservation.ReservationRepository;
+import services.EmailSender;
 
 @Controller
 @RequestMapping("api/Reservations")
@@ -49,6 +50,9 @@ public class ReservationAPIController {
 			if(validateKey(key)) {
 				Reservation newReservation = new Reservation(body);
 				reservations.save(newReservation);
+				String details = "Game: " + newReservation.getGame() + "\nWho with: " + newReservation.getPeople() + "\nDate: " + newReservation.getDate() + "\nTime: " + newReservation.getTime();
+				String emailBody = "Reservation changed by admin. Here are the new reservation details:\n\n" + details;
+				EmailSender.sendSimpleEmail("Reservation request " + newReservation.getReservationID(), emailBody, newReservation.getEmail(), "no-reply@zgamelogic.com");
 				return ResponseEntity.ok("Reservation changed");
 			}
 			return ResponseEntity.ok("Invalid apiKey");
