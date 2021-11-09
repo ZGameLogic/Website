@@ -34,8 +34,8 @@ public class IndexController {
 		
 		pages.add("Home");
 		pages.add("Projects");
-		pages.add("About me");
-		pages.add("Resume");
+		//pages.add("About me");
+		//pages.add("Resume");
 		pages.add("Reservations");
 		
 		model.addAttribute("headers", pages);
