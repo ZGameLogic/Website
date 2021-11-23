@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -36,6 +37,9 @@ public class Voyage extends ToJSONObject {
 	private String voyageType; // loot vault
 	
 	private double duration; // in hours. 4.5
+	
+	@Lob
+	private String comments;
 	
 	@Column(name = "reward_amount")
 	private long rewardAmount; // in gold earned
