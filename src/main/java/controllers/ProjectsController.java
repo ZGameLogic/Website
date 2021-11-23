@@ -38,27 +38,6 @@ public class ProjectsController {
 			String URL = current.getLinks().getSelf().get(0).getHref();
 			String info = WebRequester.getBitbucketRepoWebInfo(current.getSlug(), App.getConfig().getBitbucketAPIKey());
 			Commits commits = WebRequester.getBitbucketRepoCommits(App.getConfig().getBitbucketAPIKey(), current.getSlug());
-			/*
-			if(commits.getValues() != null) {
-				for(dataStructures.json.Commits.Value v : commits.getValues()) {
-					Build build = WebRequester.getBitbucketCommitBuildStatus(App.getConfig().getBitbucketAPIKey(), v.getId());
-					if(build.getValues() != null && build.getSize() > 0) {
-						String buildState = build.getValues().get(0).getState();
-						switch(buildState) {
-							case "SUCCESSFUL":
-								v.setState(1);
-								break;
-							case "FAILED":
-								v.setState(2);
-								break;
-							default:
-								v.setState(0);
-								break;
-						}
-					}
-				}
-			}
-			*/
 			projects.add(new Project(0, name, description, URL, info, commits));
 		}
 		// Get all the additions from the database

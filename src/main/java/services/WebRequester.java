@@ -138,7 +138,7 @@ public class WebRequester {
                 		info += jsonInfo.getJSONObject(i).getString("text") + "\n";
                 	}
             	}else {
-            		info = "website.info has not been added to this repository yet!";
+            		info = "";
             	}
             	
                 return info;
