@@ -41,6 +41,11 @@ public class Voyage extends ToJSONObject {
 	@Lob
 	private String comments;
 	
+	@Column(name = "emissary_level")
+	private int emissaryLevel;
+	
+	private String ship;
+	
 	@Column(name = "reward_amount")
 	private long rewardAmount; // in gold earned
 
