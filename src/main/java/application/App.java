@@ -44,7 +44,8 @@ public class App {
 		properties.setProperty("spring.datasource.driver-class-name", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		properties.setProperty("spring.jpa.hibernate.ddl-auto", "update");
 		properties.setProperty("spring.jpa.show-sql", "true");
-		properties.setProperty("spring.jpa.properties.hibernate.format_sql", "true");
+		properties.setProperty("org.hibernate.dialect.MySQLInnoDBDialect", "true");
+		
 		
 		// Stuff for website
 		properties.setProperty("logging.level.root", "INFO");

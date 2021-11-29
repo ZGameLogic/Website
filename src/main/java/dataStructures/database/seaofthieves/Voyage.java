@@ -47,12 +47,15 @@ public class Voyage extends ToJSONObject {
 	private String ship;
 	
 	@Column(name = "reward_amount")
-	private long rewardAmount; // in gold earned
+	private long rewardAmount; // in gold earne
 	
+	@Column(name = "double_gold", columnDefinition = "bit default 0")
+	private boolean doubleGold;
+	
+	@Column(columnDefinition = "bit default 0")
 	private boolean alliance;
 	
-	@Column(name = "double_gold")
-	private boolean doubleGold;
+	@Column(columnDefinition = "bit default 0")
 	private boolean ashen;
 
 	@PrePersist 
