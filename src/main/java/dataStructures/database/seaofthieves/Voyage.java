@@ -48,6 +48,12 @@ public class Voyage extends ToJSONObject {
 	
 	@Column(name = "reward_amount")
 	private long rewardAmount; // in gold earned
+	
+	private boolean alliance;
+	
+	@Column(name = "double_gold")
+	private boolean doubleGold;
+	private boolean ashen;
 
 	@PrePersist 
 	private void createdAt() {
