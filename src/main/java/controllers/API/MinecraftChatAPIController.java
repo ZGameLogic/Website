@@ -1,5 +1,8 @@
 package controllers.API;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,17 +50,14 @@ public class MinecraftChatAPIController {
 		
 		if(validateKey(key)) {
 			try {
-				bodyString = bodyString.replace("%7B", "{");
-				bodyString = bodyString.replace("%22", "\"");
-				bodyString = bodyString.replace("%3A", ":");
-				bodyString = bodyString.replace("%7D=", "}");
-				bodyString = bodyString.replace("%2C", ",");
-				System.out.println(bodyString);
-				ChatMessage newChat = new ObjectMapper().readValue(bodyString, ChatMessage.class);
+				String goodOne = java.net.URLDecoder.decode(bodyString, StandardCharsets.UTF_8.name());
+				ChatMessage newChat = new ObjectMapper().readValue(goodOne.substring(0, goodOne.length() - 1), ChatMessage.class);
 				chat.save(newChat);
 			} catch (JsonMappingException e) {
 				return ResponseEntity.ok("Invalid JSON format");
 			} catch (JsonProcessingException e) {
+				return ResponseEntity.ok("Invalid JSON format");
+			} catch (UnsupportedEncodingException e) {
 				return ResponseEntity.ok("Invalid JSON format");
 			}
 			return ResponseEntity.ok("Chat changed");
