@@ -47,6 +47,11 @@ public class MinecraftChatAPIController {
 		
 		if(validateKey(key)) {
 			try {
+				bodyString = bodyString.replace("%7B", "{");
+				bodyString = bodyString.replace("%22", "\"");
+				bodyString = bodyString.replace("%3A", ":");
+				bodyString = bodyString.replace("%7D=", "}");
+				bodyString = bodyString.replace("%2C", ",");
 				System.out.println(bodyString);
 				ChatMessage newChat = new ObjectMapper().readValue(bodyString, ChatMessage.class);
 				chat.save(newChat);
