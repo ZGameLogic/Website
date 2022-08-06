@@ -155,7 +155,6 @@ public class WebRequester {
             URIBuilder builder = new URIBuilder("https://zgamelogic.com:7990/rest/api/1.0/projects/BSPR/repos/" + repoSlug + "/browse/pom.xml");
             URI uri = builder.build();
             HttpGet request = new HttpGet(uri);
-            request.setHeader("Authorization", "Basic " + encodedAuthorization(apiKey));
             HttpResponse response = httpclient.execute(request);
             HttpEntity entity = response.getEntity();
             if (entity != null) {
