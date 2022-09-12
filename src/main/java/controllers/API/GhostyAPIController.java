@@ -51,6 +51,33 @@ public class GhostyAPIController {
 			return ResponseEntity.ok("Invalid JSON format");
 		}
 	}
+
+	/**
+	 * @return JSONArray of ghosts JSONObjects
+	 */
+	@GetMapping("Ghosts2")
+	public ResponseEntity<String> getAllGhostsV2() {
+		try {
+			JSONObject returnBody = new JSONObject();
+			JSONArray ghostsArray = new JSONArray();
+			for(Ghost current : ghosts.findAll()) {
+				JSONObject ghost = new JSONObject();
+				JSONArray evidenceArray = new JSONArray();
+				for(String e : current.getEvidence().split(",")) {
+					evidenceArray.put(e);
+				}
+				ghost.put("evidence", evidenceArray);
+				ghost.put("name", current.getName());
+				ghost.put("description", current.getDescription());
+				ghost.put("id", current.getId());
+				ghostsArray.put(ghost);
+			}
+			returnBody.put("ghosts", ghostsArray);
+			return ResponseEntity.ok(returnBody.toString());
+		} catch (JSONException e) {
+			return ResponseEntity.ok("Invalid JSON format");
+		}
+	}
 	
 	/**
 	 * Use this request to get the current released version ghotsy application.
