@@ -30,10 +30,10 @@ public class FileDownloadController {
 		}
 	}
 
-	
-	@GetMapping("/downloads/{fileName:.+}")
-	public ResponseEntity<Resource> download(HttpServletResponse response, HttpServletRequest request, @PathVariable("fileName") String fileName) {
-		
+	@GetMapping("/downloads/**")
+	public ResponseEntity<Resource> download(HttpServletRequest request){
+		System.out.println(request.getRequestURI());
+		String fileName = request.getRequestURI().replaceFirst("/downloads/", "");
 		// Load file as Resource
         Resource resource = null;
 		try {
@@ -47,7 +47,7 @@ public class FileDownloadController {
         try {
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
         } catch (IOException ex) {
-        	
+
         }
 
         // Fallback to the default content type if type could not be determined
@@ -63,5 +63,4 @@ public class FileDownloadController {
                 .header("Expires", "0")
                 .body(resource);
 	}
-	
 }
