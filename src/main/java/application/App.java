@@ -38,7 +38,7 @@ public class App {
 		properties.setProperty("spring.http.multipart.maxRequestSize", "-1");
 		
 		// Stuff for SQL
-		properties.setProperty("spring.datasource.url", "jdbc:sqlserver://192.168.1.12;databaseName=" + config.getDatabaseName());
+		properties.setProperty("spring.datasource.url", "jdbc:sqlserver://zgamelogic.com;databaseName=" + config.getDatabaseName());
 		properties.setProperty("spring.datasource.username", config.getSqlUser());
 		properties.setProperty("spring.datasource.password", config.getSqlPassword());
 		properties.setProperty("spring.datasource.driver-class-name", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
